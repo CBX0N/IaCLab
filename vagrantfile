@@ -1,0 +1,5 @@
+Vagrant.configure("1") do | config |
+    config.vm.box = "cbxon/bootstrap"
+    config.ssh.username = "user"
+    config.ssh.password = "packer"
+end

@@ -1,2 +1,5 @@
 *.qcow2
 *.iso
+*.box
+output-*/
+.vagrant/
