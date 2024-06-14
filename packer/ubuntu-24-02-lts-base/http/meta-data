@@ -1,0 +1,2 @@
+instance-id: packer-worker.tenant-local
+local-hostname: packer-worker
