@@ -1,0 +1,5 @@
+Vagrant.configure("1") do |config|
+    config.vm.box = "lab/bootstrap"
+    config.ssh.username = "user"
+    config.ssh.private_key_path =  ["bootstrap-sshkey"]
+end

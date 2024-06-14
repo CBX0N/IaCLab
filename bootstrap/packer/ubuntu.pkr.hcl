@@ -27,6 +27,12 @@ source "qemu" "ubuntu" {
 
 build {
   sources = ["source.qemu.ubuntu"]
+
+  provisioner "file" {
+    source      = "authorized_keys"
+    destination = "/home/user/.ssh/authorized_keys"
+  }
+
   post-processors {
     post-processor "vagrant" {
       keep_input_artifact = true
