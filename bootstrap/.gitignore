@@ -4,3 +4,4 @@
 output-*/
 .vagrant/
 authorized_keys*
+bootstrap-sshkey

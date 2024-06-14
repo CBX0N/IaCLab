@@ -8,6 +8,10 @@ packer {
       version = ">= 1.1.1"
       source  = "github.com/hashicorp/vagrant"
     }
+    ansible = {
+      version = ">= 1.1.1"
+      source  = "github.com/hashicorp/ansible"
+    }
   }
 }
 
@@ -33,6 +37,12 @@ build {
     destination = "/home/user/.ssh/authorized_keys"
   }
 
+  provisioner "ansible" {
+    playbook_file = "./ansible/plays/bootstrap.yaml"
+    user = "user"
+    extra_arguments = [ "--scp-extra-args", "'-O'" ]
+  }
+  
   post-processors {
     post-processor "vagrant" {
       keep_input_artifact = true
@@ -40,7 +50,4 @@ build {
       output              = "{{.BuildName}}_bootstrap_{{.Provider}}_{{.Architecture}}.box"
     }
   }
-  #   provisioner "ansible" {
-  #     playbook_file = "ansible/qemu.yml"
-  #   }
 }

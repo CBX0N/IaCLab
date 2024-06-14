@@ -1,0 +1,10 @@
+- name: Configure Bootstrap VM
+  hosts: default
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Install Packages
+      ansible.builtin.apt:
+        pkg:
+          - git
+        state: present
