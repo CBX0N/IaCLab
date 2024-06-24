@@ -6,3 +6,9 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     lock_passwd: false
+network:
+  version: 2
+  ethernets:
+    eth0:
+      match: {name: "ens*"}
+      dhcp4: true

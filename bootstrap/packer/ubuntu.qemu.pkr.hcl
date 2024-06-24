@@ -37,12 +37,21 @@ build {
     destination = "/home/user/.ssh/authorized_keys"
   }
 
+  provisioner "file" {
+    source      = "./cloud-init/50-cloud-init.yaml"
+    destination = "/tmp/50-cloud-init.yaml"
+  }
+
+  provisioner "shell" {
+    inline = ["sudo mv /tmp/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml"]
+  }
+
   provisioner "ansible" {
     playbook_file = "./ansible/plays/bootstrap.yaml"
     user = "user"
     extra_arguments = [ "--scp-extra-args", "'-O'" ]
   }
-  
+
   post-processors {
     post-processor "vagrant" {
       keep_input_artifact = true
