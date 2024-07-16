@@ -1,0 +1,46 @@
+- name: Disable UFW
+  community.general.ufw:
+    state: disabled
+
+- name: Install Containerd
+  block:
+    - name: Installing Containerd
+      ansible.builtin.apt:
+        pkg:
+          - containerd
+          # - kubectl
+        state: present
+    - name: Make Directory
+      ansible.builtin.file:
+        path: /opt/cni/bin
+        state: directory
+    - name: Download CNI-Plugins
+      ansible.builtin.get_url:
+        url: https://github.com/containernetworking/plugins/releases/download/v1.5.1/cni-plugins-linux-amd64-v1.5.1.tgz
+        dest: /tmp/cni-plugins-linux-amd64-v1.5.1.tgz
+    - name: Extract cni-plugins-linux-amd64-v1.5.1.tgz to /opt/cni/bin
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: /tmp/cni-plugins-linux-amd64-v1.5.1.tgz
+        dest: /opt/cni/bin
+
+- name: Install K3s
+  block:
+    - name: Make Directory
+      ansible.builtin.file:
+        path: /var/lib/rancher/k3s/agent/images/
+        state: directory
+    - name: Download K3s Images
+      ansible.builtin.get_url:
+        url: https://github.com/k3s-io/k3s/releases/download/v1.30.0%2Bk3s1/k3s-airgap-images-amd64.tar.gz
+        dest: /tmp/k3s-airgap-images-amd64.tar.gz
+    - name: Extract k3s-airgap-images-amd64.tar.gz to /var/lib/rancher/k3s/agent/images/
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: /tmp/k3s-airgap-images-amd64.tar.gz
+        dest: /var/lib/rancher/k3s/agent/images/
+    - name: Install K3s Binary
+      ansible.builtin.get_url:
+        url: https://github.com/k3s-io/k3s/releases/download/v1.30.0%2Bk3s1/k3s
+        dest: /usr/local/bin/k3s
+        mode: 755

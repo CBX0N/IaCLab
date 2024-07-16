@@ -1,0 +1,17 @@
+- name: Setting up Terraform source
+  block:
+    - name: Adding Terraform GPG key
+      ansible.builtin.get_url:
+        url: https://apt.releases.hashicorp.com/gpg
+        dest: /usr/share/keyrings/hashicorp-archive-keyring.asc
+
+    - name: Adding Terraform source
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+        state: present
+        update_cache: true
+
+- name: Installing Terraform
+  ansible.builtin.apt:
+    name: terraform
+    state: present
