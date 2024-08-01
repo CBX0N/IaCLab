@@ -1,0 +1,7 @@
+- name: Configure K3s VM's
+  hosts: all
+  become: true
+  remote_user: packer
+  gather_facts: false
+  roles:
+    - install-k3s

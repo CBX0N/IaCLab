@@ -1,0 +1,5 @@
+[hosts]
+k3s_00 ansible_host=192.168.0.167 ansible_ssh_password=packer ansible_become_password=packer
+k3s_01 ansible_host=192.168.0.133 ansible_ssh_password=packer ansible_become_password=packer
+k3s_02 ansible_host=192.168.0.187 ansible_ssh_password=packer ansible_become_password=packer
+k3s_03 ansible_host=192.168.0.46 ansible_ssh_password=packer ansible_become_password=packer

@@ -7,50 +7,31 @@ packer {
   }
 }
 
-variable "proxmox_url" {
-  type = string
-  description = "Proxmox API URL, E.G. https://proxmox:8006/api2/json"
-}
-
-variable "proxmox_token" {
-  type = string
-  description = "Proxmox API Token"
-}
-
-variable "proxmox_user" {
-  type = string
-  description = "Proxmox API User E.G. root@pam!terraform"
-}
-
-variable "proxmox_node" {
-  type = string
-  description = "Proxmox Node E.G. pve"
-}
-
-
-source "proxmox-iso" "ubuntu-jammy" {
-  template_name            = "ubuntu-jammy-base-image"
+source "proxmox-iso" "ubuntu-noble" {
+  template_name            = "ubuntu-noble-base-image"
   template_description     = ""
   node                     = var.proxmox_node
   username                 = var.proxmox_user
   token                    = var.proxmox_token
   proxmox_url              = var.proxmox_url
   insecure_skip_tls_verify = true
-  http_directory           = "http"
-  ssh_username             = "root"
+  http_directory           = "config"
+  ssh_username             = "packer"
   ssh_password             = "packer"
   ssh_timeout              = "15m"
   unmount_iso              = true
-  # iso_storage_pool         = "local"
-  # iso_checksum             = "45f873de9f8cb637345d6e66a583762730bbea30277ef7b32c9c3bd6700a32b2"
-  iso_file                 = "local:iso/ubuntu-24.04-live-server-amd64.iso"
-  # iso_url                  = "https://releases.ubuntu.com/22.04/ubuntu-22.04.4-live-server-amd64.iso"
-  boot_command             = [ "e","<down><down><down><end><bs><bs><bs>","autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---"]
+  iso_storage_pool         = "local"
+  iso_checksum             = "8762f7e74e4d64d72fceb5f70682e6b069932deedb4949c6975d0f0fe0a91be3"
+  iso_download_pve         = true
+  iso_url                  = "https://releases.ubuntu.com/noble/ubuntu-24.04-live-server-amd64.iso"
+  boot_command             = ["e", "<down><down><down><end><bs><bs><bs>", "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ---", "<f10>"]
   boot_wait                = "5s"
+  memory                   = "4096"
   disks {
-    disk_size    = "5G"
+    disk_size    = "30G"
     storage_pool = "datastore1"
     type         = "scsi"
+    ssd          = "true"
   }
   network_adapters {
     bridge = "vmbr0"
@@ -59,5 +40,14 @@ source "proxmox-iso" "ubuntu-jammy" {
 }
 
 build {
-  sources = ["source.proxmox-iso.ubuntu-jammy"]
+  sources = ["source.proxmox-iso.ubuntu-noble"]
+
+  provisioner "file" {
+    source      = "./config/50-cloud-init.yaml"
+    destination = "/tmp/50-cloud-init.yaml"
+  }
+
+  provisioner "shell" {
+    inline = ["echo 'packer' | sudo -S mv /tmp/50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml"]
+  }
 }
