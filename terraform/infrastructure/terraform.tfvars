@@ -15,3 +15,12 @@ K3s-vm-config = {
   boot_order = "order=ide0"
   balloon_min = 512
 }
+
+HAProxy-vm-config = {
+  qemu_agent       = 1
+  vm_template_name = "ubuntu-noble-base-image"
+  name             = "HAProxy"
+  desc = "HAProxy LB deployed by Terraform & Configured with Ansible"
+  # boot_order = "order=ide0"
+  balloon_min = 512
+}

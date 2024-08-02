@@ -2,6 +2,8 @@
   hosts: all
   become: true
   remote_user: packer
-  gather_facts: false
+  gather_facts: true
   roles:
+    - configure-os
     - install-k3s
+  

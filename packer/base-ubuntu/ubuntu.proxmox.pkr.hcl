@@ -28,7 +28,7 @@ source "proxmox-iso" "ubuntu-noble" {
   boot_wait                = "5s"
   memory                   = "4096"
   disks {
-    disk_size    = "30G"
+    disk_size    = "20G"
     storage_pool = "datastore1"
     type         = "scsi"
     ssd          = "true"

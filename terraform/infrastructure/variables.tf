@@ -37,3 +37,22 @@ variable "K3s-vm-config" {
     }))
   })
 }
+
+variable "HAProxy-vm-config" {
+  type = object({
+    name             = string
+    desc             = optional(string, null)
+    boot_order       = optional(string, null)
+    target_node      = optional(string, null)
+    vm_template_name = string
+    qemu_agent       = optional(number, 1)
+    cores            = optional(number, null)
+    memory           = optional(number, null)
+    balloon_min      = optional(number, null)
+    network = optional(object({
+      bridge   = string
+      firewall = bool
+      model    = string
+    }))
+  })
+}
