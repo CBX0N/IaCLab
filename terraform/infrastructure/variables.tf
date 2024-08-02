@@ -26,6 +26,7 @@ variable "K3s-vm-config" {
     boot_order       = optional(string, null)
     target_node      = optional(string, null)
     vm_template_name = string
+    vm_state         = optional(string, "stopped")
     qemu_agent       = optional(number, 1)
     cores            = optional(number, null)
     memory           = optional(number, null)
@@ -45,6 +46,7 @@ variable "HAProxy-vm-config" {
     boot_order       = optional(string, null)
     target_node      = optional(string, null)
     vm_template_name = string
+    vm_state         = optional(string, "stopped")
     qemu_agent       = optional(number, 1)
     cores            = optional(number, null)
     memory           = optional(number, null)

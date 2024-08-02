@@ -5,7 +5,7 @@ resource "proxmox_vm_qemu" "K3s-VMs" {
   desc        = var.K3s-vm-config.desc
   target_node = var.K3s-vm-config.target_node != null ? var.K3s-vm-config.target_node : var.default-vm-config.target_node
   clone       = var.K3s-vm-config.vm_template_name
-  vm_state    = "stopped"
+  vm_state    = var.K3s-vm-config.vm_state
   full_clone  = true
   agent       = var.K3s-vm-config.qemu_agent
   cores       = var.K3s-vm-config.cores != null ? var.K3s-vm-config.cores : var.default-vm-config.cores
@@ -18,7 +18,7 @@ resource "proxmox_vm_qemu" "K3s-VMs" {
     model    = var.K3s-vm-config.network != null ? var.K3s-vm-config.network.model : var.default-vm-config.network_adapter_model
   }
   lifecycle {
-    ignore_changes = [disks, vm_state]
+    ignore_changes = [disks]
   }
 }
 
@@ -29,7 +29,7 @@ resource "proxmox_vm_qemu" "HAProxy-VMs" {
   desc        = var.HAProxy-vm-config.desc
   target_node = var.HAProxy-vm-config.target_node != null ? var.HAProxy-vm-config.target_node : var.default-vm-config.target_node
   clone       = var.HAProxy-vm-config.vm_template_name
-  vm_state    = "stopped"
+  vm_state    = var.HAProxy-vm-config.vm_state
   full_clone  = true
   agent       = var.HAProxy-vm-config.qemu_agent
   cores       = var.HAProxy-vm-config.cores != null ? var.HAProxy-vm-config.cores : var.default-vm-config.cores
@@ -42,6 +42,6 @@ resource "proxmox_vm_qemu" "HAProxy-VMs" {
     model    = var.HAProxy-vm-config.network != null ? var.HAProxy-vm-config.network.model : var.default-vm-config.network_adapter_model
   }
   lifecycle {
-    ignore_changes = [disks, vm_state]
+    ignore_changes = [disks]
   }
 }

@@ -16,3 +16,7 @@ autoinstall:
     - qemu-guest-agent
   user-data:
     ssh_authorized_keys: [ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIES3MWtrYdJGdRLvp6oKl3SWHYGGcR725ZaZmu2+kcWx cbxon@lap]
+    users:
+      - name: ansible
+        groups: sudo, adm
+        passwd: '$1$JOQ1eyC5$GX12Or3HRCTobKiMi.URw1'

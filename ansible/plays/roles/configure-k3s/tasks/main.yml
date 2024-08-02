@@ -44,3 +44,41 @@
         url: https://github.com/k3s-io/k3s/releases/download/v1.30.0%2Bk3s1/k3s
         dest: /usr/local/bin/k3s
         mode: 755
+
+- name: Configure K3s server node
+  when: "'k3s_server' in group_names"
+  block:
+    - name: Copy K3s_Server service
+      vars:
+        - k3s_service_command: "k3s server --write-kubeconfig-mode=644"
+      ansible.builtin.template:
+        dest: /etc/systemd/system/k3s.service
+        src: ./files/k3s.service.j2
+    - name: Enable & Start K3s Server service
+      ansible.builtin.systemd_service:
+        name: k3s
+        enabled: true
+        state: started
+    - name: Create Auth K3s Token
+      ansible.builtin.shell:
+        cmd: k3s token create
+      register: k3s_agent_join_token
+      run_once: true
+
+- set_fact: token={{ k3s_agent_join_token.stdout }}
+
+- name: Join K3s agents to 
+  when: "'k3s_agent' in group_names"
+  block:
+    - name: Copy K3s_Server service
+      vars:
+        - k3s_service_command: "k3s agent --server https://192.168.0.50:6443/ --token {{ token }}"
+      ansible.builtin.template:
+        dest: /etc/systemd/system/k3s.service
+        src: ./files/k3s.service.j2
+    - name: Enable & Start K3s Server service
+      ansible.builtin.systemd_service:
+        name: k3s
+        enabled: true
+    - name: Reboot K3s agents
+      ansible.builtin.reboot:

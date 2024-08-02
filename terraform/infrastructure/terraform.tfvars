@@ -12,7 +12,8 @@ K3s-vm-config = {
   vm_template_name = "ubuntu-noble-base-image"
   name             = "K3s"
   desc = "K3s Cluster deployed by Terraform & Configured with Ansible"
-  boot_order = "order=ide0"
+  # boot_order = "order=ide0"
+  # vm_state = "running"
   balloon_min = 512
 }
 

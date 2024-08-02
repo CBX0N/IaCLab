@@ -1,6 +1,6 @@
 [all:vars]
-ansible_ssh_password=packer 
-ansible_become_password=packer 
+ansible_ssh_password=ansible 
+ansible_become_password=ansible 
 ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
 
 [k3s:children]
@@ -8,9 +8,9 @@ k3s_server
 k3s_agent
 
 [k3s_server]
-k3s00.cbxon.local ansible_host=192.168.0.50 
+k3s00.cbxon.local ansible_host=192.168.0.16 
 
 [k3s_agent]
-k3s01.cbxon.local ansible_host=192.168.0.202
-k3s02.cbxon.local ansible_host=192.168.0.128
-k3s03.cbxon.local ansible_host=192.168.0.80
+k3s01.cbxon.local ansible_host=192.168.0.134
+k3s02.cbxon.local ansible_host=192.168.0.180
+k3s03.cbxon.local ansible_host=192.168.0.224

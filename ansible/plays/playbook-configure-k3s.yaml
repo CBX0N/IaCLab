@@ -1,9 +1,9 @@
+---
 - name: Configure K3s VM's
-  hosts: all
+  hosts: k3s
   become: true
-  remote_user: packer
+  remote_user: ansible
   gather_facts: true
   roles:
     - configure-os
-    - install-k3s
-  
+    - configure-k3s
