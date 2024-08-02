@@ -19,4 +19,5 @@ autoinstall:
     users:
       - name: ansible
         groups: sudo, adm
-        passwd: '$1$JOQ1eyC5$GX12Or3HRCTobKiMi.URw1'
+        lock_passwd: false
+        passwd: $6$rounds=4096$W9fcIpq.Zu0xiTWe$cJoYFTN/WWltuoQA7tniD/CjWkOB6J4z7cqYMYJTahg/uYRx.smGmDH2TaAg6/MoCyxx5uZYq7MBMtAiPHZLA/

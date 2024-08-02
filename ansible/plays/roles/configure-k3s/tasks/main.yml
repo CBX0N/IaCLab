@@ -72,7 +72,7 @@
   block:
     - name: Copy K3s_Server service
       vars:
-        - k3s_service_command: "k3s agent --server https://192.168.0.50:6443/ --token {{ token }}"
+        - k3s_service_command: "k3s agent --server https://192.168.0.153:6443/ --token {{ token }}"
       ansible.builtin.template:
         dest: /etc/systemd/system/k3s.service
         src: ./files/k3s.service.j2
