@@ -8,7 +8,7 @@ default_vm_config = {
 }
 
 dk_vm_config = {
-  count            = 2
+  count            = 1
   qemu_agent       = 1
   vm_template_name = "ubuntu-noble-base-image"
   name             = "dk"

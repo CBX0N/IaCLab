@@ -1,0 +1,25 @@
+- name: Create Bind9 config files
+  block:
+  - name: Copy config files
+    ansible.builtin.copy:
+      dest: /usr/docker/bind9/
+      src: ./files/
+
+- name: Docker pull Bind9 Image
+  community.docker.docker_image:
+    name: ubuntu/bind9
+    source: pull
+    state: present
+- community.docker.docker_container:
+    name: bind9-container
+    image: ubuntu/bind9
+    state: started
+    restart: true
+    restart_policy: unless-stopped
+    ports:
+      - "30053:53"
+      - "30053:53/udp"
+    env:
+      TZ: "UTC"
+    volumes:
+      - /usr/docker/bind9/named.conf:/etc/bind9/named.conf  

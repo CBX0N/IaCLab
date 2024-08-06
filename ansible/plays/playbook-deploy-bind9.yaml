@@ -1,0 +1,10 @@
+---
+- name: Configure Docker VM's
+  hosts: bind9
+  become: true
+  remote_user: ansible
+  gather_facts: true
+  roles:
+    - configure-os
+    - configure-docker
+    - deploy-bind9
