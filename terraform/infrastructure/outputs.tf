@@ -1,7 +1,11 @@
-output "K3s_vm_ips" {
-    value = proxmox_vm_qemu.K3s-VMs[*].ssh_host
+output "dk_vm_ips" {
+  value = module.dk_vms.vm_ips
 }
 
-output "HAProxy_vm_ips" {
-    value = proxmox_vm_qemu.HAProxy-VMs[*].ssh_host
-}
+# output "k3s_vm_ips" {
+#     value = module.k3s_vms[*].ssh_host
+# }
+
+# output "lb_vm_ips" {
+#     value = module.lb_vms[*].ssh_host
+# }

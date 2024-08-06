@@ -14,3 +14,7 @@ k3s00.cbxon.local ansible_host=192.168.0.153
 k3s01.cbxon.local ansible_host=192.168.0.61
 k3s02.cbxon.local ansible_host=192.168.0.177
 k3s03.cbxon.local ansible_host=192.168.0.189
+
+[docker]
+dk00.cbxon.local ansible_host=192.168.0.67
+dk01.cbxon.local ansible_host=192.168.0.172

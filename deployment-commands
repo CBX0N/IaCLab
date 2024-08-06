@@ -1,3 +1,0 @@
-packer build -var-file secrets.pkrvars.hcl -force .
-terraform apply -var-file secrets.terraform.tfvars --auto-approve .
-ansible-playbook -i inventory/hosts-k3s playbook-configure-k3s.yaml

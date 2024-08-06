@@ -1,4 +1,4 @@
-default-vm-config = {
+default_vm_config = {
   cores                    = 2
   memory                   = 2048
   target_node              = "pve"
@@ -7,21 +7,33 @@ default-vm-config = {
   network_bridge           = "vmbr0"
 }
 
-K3s-vm-config = {
+dk_vm_config = {
+  count            = 2
   qemu_agent       = 1
   vm_template_name = "ubuntu-noble-base-image"
-  name             = "K3s"
-  desc = "K3s Cluster deployed by Terraform & Configured with Ansible"
-  boot_order = "order=ide0"
-  vm_state = "running"
+  name             = "dk"
+  desc             = "Docker swarm deployed by Terraform & Configured with Ansible"
+  boot_order       = "order=ide0"
+  vm_state         = "running"
+  balloon_min      = 512
+}
+
+k3s_vm_config = {
+  qemu_agent       = 1
+  vm_template_name = "ubuntu-noble-base-image"
+  name             = "k3s"
+  desc             = "K3s cluster deployed by Terraform & Configured with Ansible"
+  # boot_order = "order=ide0"
+  # vm_state = "running"
   balloon_min = 512
 }
 
-HAProxy-vm-config = {
+lb_vm_config = {
   qemu_agent       = 1
   vm_template_name = "ubuntu-noble-base-image"
-  name             = "HAProxy"
-  desc = "HAProxy LB deployed by Terraform & Configured with Ansible"
+  name             = "lb"
+  desc             = "HAProxy lb deployed by Terraform & Configured with Ansible"
   # boot_order = "order=ide0"
+  # vm_state = "running"
   balloon_min = 512
 }

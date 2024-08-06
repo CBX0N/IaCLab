@@ -1,0 +1,9 @@
+---
+- name: Configure Docker VM's
+  hosts: docker
+  become: true
+  remote_user: ansible
+  gather_facts: true
+  roles:
+    - configure-os
+    - configure-docker
