@@ -19,7 +19,7 @@ variable "default_vm_config" {
   })
 }
 
-variable "dk_vm_config" {
+variable "ns_vm_config" {
   type = object({
     count            = optional(number, 0)
     name             = string

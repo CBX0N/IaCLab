@@ -7,3 +7,15 @@
   ansible.builtin.user:
     name: packer
     state: absent
+
+- name: Add SSH Key
+  block: 
+    - name: create empty file
+      ansible.builtin.file:
+        path: "/home/ansible/.ssh/authorized_keys"
+        state: touch
+    - name: put public Key
+      ansible.builtin.lineinfile:
+        path: "/home/ansible/.ssh/authorized_keys"
+        line: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD4n55AEWaWN58HD1dlXHeplUrBhMQTdXZnd2doWSL9FW54jIg7nYgyVImLy6802gqKSH7rTO0pCK0A6O8jva8v8KRq77eE26+5Z1Bslx3FgGmYzvXpd81jHFw6k4HZQp02epntDSAHU4FWIaoE/rzVxZWijPRn4C8PT6Ccoi6yncFWTsUNjPc+s94dxRPMvGi6nRvw0Zha1Coq5zi4rtp0pGWadCfEb/2aDYG3YuXN+0hZIJdoSReR9nXIFFmK2D307WCKgeGUSNtGM0epj7U5ILXzPLcnfo0DqNqgx9fSdzBa6CEeijv9AGNOn+jNWufKSolvbk0vkTBK/nDqvGw4xDtK4gV4qwlMwxfBUAGBUleT+f+nCh3jxlpC4zSklKnu0HD8/w4m2pYVcCUSKChFwmcxdxXgee8+f+HXtpmkxrPhl9b8vb6C+osp0ntE80So7yNzMpnfKj77ZzqOqbifbqpgwaMZJYd6eppukMgQHJtP1UyhYAomhJBXQOLb6Zc= charlie@tsl00560"
+     

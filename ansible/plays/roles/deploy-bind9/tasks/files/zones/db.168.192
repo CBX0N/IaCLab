@@ -1,0 +1,20 @@
+$TTL    604800
+@       IN      SOA     ns1.internal.cbxon.co.uk admin.ns1.internal.cbxon.co.uk. (
+                              3         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+; name servers - NS records
+  IN  NS  ns1.internal.cbxon.co.uk.
+
+; PTR records
+67.0    IN  PTR ns1.internal.cbxon.co.uk.      ; 192.168.0.67
+230.0   IN  PTR proxmox.internal.cbxon.co.uk.  ; 192.168.0.230
+30.0    IN  PTR k3s00.internal.cbxon.co.uk.    ; 192.168.0.30
+30.0    IN  PTR k3s01.internal.cbxon.co.uk.    ; 192.168.0.30
+30.0    IN  PTR k3s02.internal.cbxon.co.uk.    ; 192.168.0.30
+30.0    IN  PTR k3s03.internal.cbxon.co.uk.    ; 192.168.0.30
+67.0    IN  PTR dk00.internal.cbxon.co.uk.     ; 192.168.0.67
+172.0   IN  PTR dk01.internal.cbxon.co.uk.     ; 192.168.0.172

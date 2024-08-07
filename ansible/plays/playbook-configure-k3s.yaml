@@ -6,4 +6,4 @@
   gather_facts: true
   roles:
     - configure-os
-    - configure-k3s
+    # - configure-k3s

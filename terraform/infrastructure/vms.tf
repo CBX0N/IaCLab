@@ -30,11 +30,11 @@
   
 # }
 
-module "dk_vms" {
+module "ns_vms" {
   # Deploy Docker VM's
   source            = "./modules/vm"
   default_vm_config = var.default_vm_config
-  vm_config         = var.dk_vm_config
+  vm_config         = var.ns_vm_config
 }
 
 module "k3s_vms" {

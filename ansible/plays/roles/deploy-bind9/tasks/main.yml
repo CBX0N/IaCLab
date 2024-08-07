@@ -15,11 +15,10 @@
     image: ubuntu/bind9
     state: started
     restart: true
+    network_mode: host
     restart_policy: unless-stopped
-    ports:
-      - "30053:53"
-      - "30053:53/udp"
     env:
+      BIND9_USER: root
       TZ: "UTC"
     volumes:
-      - /usr/docker/bind9/named.conf:/etc/bind9/named.conf  
+      - /usr/docker/bind9/:/etc/bind/:rw

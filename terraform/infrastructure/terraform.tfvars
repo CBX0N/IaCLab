@@ -7,18 +7,19 @@ default_vm_config = {
   network_bridge           = "vmbr0"
 }
 
-dk_vm_config = {
+ns_vm_config = {
   count            = 1
   qemu_agent       = 1
   vm_template_name = "ubuntu-noble-base-image"
-  name             = "dk"
-  desc             = "Docker swarm deployed by Terraform & Configured with Ansible"
-  boot_order       = "order=ide0"
-  vm_state         = "running"
+  name             = "ns"
+  desc             = "Docker hosted Bind9 deployed by Terraform & Configured with Ansible"
+  # boot_order       = "order=ide0"
+  # vm_state         = "running"
   balloon_min      = 512
 }
 
 k3s_vm_config = {
+  count = 4
   qemu_agent       = 1
   vm_template_name = "ubuntu-noble-base-image"
   name             = "k3s"

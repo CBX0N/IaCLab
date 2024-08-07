@@ -1,10 +1,10 @@
-output "dk_vm_ips" {
-  value = module.dk_vms.vm_ips
+output "ns_vm_ips" {
+  value = module.ns_vms.vm_ips
 }
 
-# output "k3s_vm_ips" {
-#     value = module.k3s_vms[*].ssh_host
-# }
+output "k3s_vm_ips" {
+    value = module.k3s_vms.vm_ips
+}
 
 # output "lb_vm_ips" {
 #     value = module.lb_vms[*].ssh_host

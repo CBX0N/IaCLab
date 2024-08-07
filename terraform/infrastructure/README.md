@@ -9,7 +9,7 @@ The following requirements are needed by this module:
 
 The following Modules are called:
 
-### <a name="module_dk_vms"></a> [dk\_vms](#module\_dk\_vms)
+### <a name="module_ns_vms"></a> [ns\_vms](#module\_ns\_vms)
 
 Source: ./modules/vm
 
@@ -48,7 +48,7 @@ object({
   })
 ```
 
-### <a name="input_dk_vm_config"></a> [dk\_vm\_config](#input\_dk\_vm\_config)
+### <a name="input_ns_vm_config"></a> [ns\_vm\_config](#input\_ns\_vm\_config)
 
 Description: n/a
 
@@ -151,7 +151,7 @@ Type: `string`
 
 The following outputs are exported:
 
-### <a name="output_dk_vm_ips"></a> [dk\_vm\_ips](#output\_dk\_vm\_ips)
+### <a name="output_ns_vm_ips"></a> [ns\_vm\_ips](#output\_ns\_vm\_ips)
 
 Description: n/a
 <!-- END_TF_DOCS -->

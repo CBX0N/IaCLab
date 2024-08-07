@@ -8,16 +8,20 @@ k3s_server
 k3s_agent
 
 [k3s_server]
-k3s00.cbxon.local ansible_host=192.168.0.153
+k3s00.internal.cbxon.co.uk
 
 [k3s_agent]
-k3s01.cbxon.local ansible_host=192.168.0.61
-k3s02.cbxon.local ansible_host=192.168.0.177
-k3s03.cbxon.local ansible_host=192.168.0.189
+k3s01.internal.cbxon.co.uk
+k3s02.internal.cbxon.co.uk
+k3s03.internal.cbxon.co.uk
 
 [docker:children]
 bind9
-; dk01.cbxon.local ansible_host=192.168.0.172
+dk01.internal.cbxon.co.uk
 
 [bind9]
-dk00.cbxon.local ansible_host=192.168.0.67
+dk00.internal.cbxon.co.uk ansible_host=192.168.0.67
+
+[haproxy]
+lb00.internal.cbxon.co.uk
+lb01.internal.cbxon.co.uk
