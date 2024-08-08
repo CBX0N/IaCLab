@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bind9
+  name: bind9-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bind9
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: bind9
+    spec:
+      volumes:
+        - name: bind-config
+          configMap:
+            name: bind-config
+            items:
+              - key: named.conf
+                path: named.conf
+      containers:
+      - image: ubuntu/bind9
+        name: bind9
+        volumeMounts:
+          - name: bind-config
+            mountPath: /etc/bind
+        resources: {}
+status: {}
