@@ -1,2 +1,7 @@
-*.qcow2
-*.iso
+.vscode
+.terraform*
+terraform.tfstate*
+secrets.*
+hosts-
+named.conf.key
+kube.config

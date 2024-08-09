@@ -1,0 +1,9 @@
+---
+- name: Configure Core Infrastructure
+  hosts: k3s_server
+  become: true
+  remote_user: ansible
+  gather_facts: true
+  roles:
+    - configure-os
+    - Install-k3s
