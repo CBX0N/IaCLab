@@ -1,0 +1,22 @@
+name: Create Base Image in Proxmox
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: "packer: Init"
+        run: packer init .
+        working-directory: packer/base-ubuntu
+      - name: "packer: Build"
+        run: packer build .
+        working-directory: packer/base-ubuntu
+        env:
+          PKR_VAR_proxmox_url: ${{ secrets.proxmox_url }}
+          PKR_VAR_proxmox_token: ${{ secrets.proxmox_token }}
+          PKR_VAR_proxmox_user: ${{ secrets.proxmox_user }}
+          PKR_VAR_proxmox_node: ${{ secrets.proxmox_node }}
+          PKR_VAR_ssh_password: ${{ secrets.PKR_SSH_PASSWORD }}

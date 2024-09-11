@@ -1,0 +1,1 @@
+postgresql_data_path = "/var/lib/postgresql/data"

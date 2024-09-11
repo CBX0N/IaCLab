@@ -1,0 +1,24 @@
+name: Deploy Kubernetes Resources
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Create Secrets Files"
+        working-directory: terraform-deploy-k3s
+        run: |
+          touch secrets.auto.tfvars
+          echo 'postgresql_password="${{ secrets.postgresql_password }}"' > secrets.auto.tfvars
+      - name: "Terraform : Init"
+        run: terraform init
+        working-directory: terraform-deploy-k3s
+      - name: "Terraform : Plan"
+        run: terraform plan
+        working-directory: terraform-deploy-k3s
+      - name: "Terraform : Apply"
+        run: terraform apply -auto-approve
+        working-directory: terraform-deploy-k3s

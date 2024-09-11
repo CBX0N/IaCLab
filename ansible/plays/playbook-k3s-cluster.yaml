@@ -1,0 +1,17 @@
+---
+- name: Configure Core Infrastructure
+  hosts: k3s
+  become: true
+  remote_user: ansible
+  gather_facts: true
+  roles:
+    - configure-os
+    - install-k3s
+
+- name: Configure Cluster
+  hosts: k3s
+  become: true
+  remote_user: ansible
+  gather_facts: true
+  roles:
+    - configure-k3s-cluster

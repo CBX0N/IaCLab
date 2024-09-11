@@ -1,0 +1,19 @@
+[all:vars]
+ansible_ssh_password=ansible 
+ansible_become_password=ansible 
+ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+
+[k3s:children]
+k3s_server
+k3s_agent
+
+[k3s_server]
+k3s00.internal.cbxon.co.uk
+
+[k3s_agent]
+k3s01.internal.cbxon.co.uk
+k3s02.internal.cbxon.co.uk
+; k3s03.internal.cbxon.co.uk
+
+[bind9]
+bind9.internal.cbxon.co.uk ansible_host=192.168.0.234

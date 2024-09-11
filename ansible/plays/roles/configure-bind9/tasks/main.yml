@@ -1,0 +1,34 @@
+---
+- name: Ansible delete file glob
+  find:
+    paths: /etc/bind/
+    pattern: "*"
+  register: files_to_delete
+
+- name: Ansible remove file glob
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ files_to_delete.files }}"
+
+- name: "Copy config files to /etc/bind"
+  ansible.builtin.copy:
+    dest: /etc/bind/{{item}}
+    src: "{{item}}"
+  loop: "{{ conf_files }}"
+
+- name: "Copy tsig-key"
+  ansible.builtin.template:
+    dest: /etc/bind/named.conf.key
+    src: "named.conf.key.j2"
+
+- name: "Copy zone files to /var/lib/bind"
+  ansible.builtin.copy:
+    dest: /var/lib/bind/{{item}}
+    src: "{{item}}"
+  loop: "{{ zones }}"
+  
+- name: "Restart bind service"
+  ansible.builtin.systemd:
+    name: bind9
+    state: restarted
