@@ -29,8 +29,8 @@ virtual_machines = {
     vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
     name             = "k3s0"
     desc             = "k3s deployed by Terraform & Configured with Ansible"
-    # vm_state         = "running"
-    # boot_order       = "order=scsi0"
+    vm_state         = "running"
+    boot_order       = "order=scsi0"
     memory           = 4096
     cloudinit = {
       dns_server = "192.168.0.234"
@@ -46,8 +46,8 @@ virtual_machines = {
     vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
     name             = "k3s1"
     desc             = "k3s deployed by Terraform & Configured with Ansible"
-    # vm_state         = "running"
-    # boot_order       = "order=scsi0"
+    vm_state         = "running"
+    boot_order       = "order=scsi0"
     memory           = 4096
     cloudinit = {
       dns_server = "192.168.0.234"
@@ -63,8 +63,8 @@ virtual_machines = {
     vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
     name             = "k3s2"
     desc             = "k3s deployed by Terraform & Configured with Ansible"
-    # vm_state         = "running"
-    # boot_order       = "order=scsi0"
+    vm_state         = "running"
+    boot_order       = "order=scsi0"
     memory           = 4096
     cloudinit = {
       dns_server = "192.168.0.234"
