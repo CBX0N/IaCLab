@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-core-infrastructure:
+  terraform-deploy-core-infrastructure:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -31,13 +31,14 @@ jobs:
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
   ansible-configure-bind9-server:
-    needs: deploy-core-infrastructure
+    needs: terraform-deploy-core-infrastructure
     runs-on: self-hosted
     steps:
         - name: "Configure Bind9"
           working-directory: ansible/plays
-          run: ansible-playbook -i inventory/hosts playbook-bind9.yaml
-  deploy-bind-9-records:
+          run: echo ""
+        #   run: ansible-playbook -i inventory/hosts playbook-bind9.yaml
+  terraform-deploy-bind-9-records:
     needs: ansible-configure-bind9-server
     runs-on: self-hosted
     steps:
@@ -63,7 +64,7 @@ jobs:
           env:
             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
   ansible-configure-k3s-cluster:
-    needs: deploy-bind-9-records
+    needs: terraform-deploy-bind-9-records
     runs-on: self-hosted
     steps:
       - name: "Configure K3s cluster"
