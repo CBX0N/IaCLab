@@ -1,11 +1,11 @@
 name: Deploy Core Infrastructure
 
 on:
-  # push:
+  push:
   workflow_dispatch:
 
 jobs:
-  Deploy:
+  deploy-core-infrastructure:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -30,13 +30,42 @@ jobs:
         working-directory: terraform-deploy-core-infrastructure
         env:
           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-  Configure-K3s:
-    needs: Deploy
+  ansible-configure-bind9-server:
+    needs: deploy-core-infrastructure
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
+        - name: "Configure Bind9"
+          working-directory: ansible/plays
+          run: ansible-playbook -i inventory/hosts playbook-bind9.yaml
+  deploy-bind-9-records:
+    needs: ansible-configure-bind9-server
+    runs-on: self-hosted
+    steps:
+        - name: "Create Secrets Files"
+          working-directory: terraform-deploy-bind9-dns-records
+          run: |
+            touch secrets.auto.tfvars
+            echo 'bind9_key_secret="${{ secrets.BIND9_KEY_SECRET }}"' > secrets.auto.tfvars
+        - name: "Terraform : Init"
+          run: terraform init
+          working-directory: terraform-deploy-bind9-dns-records
+          env:
+            TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+        - name: "Terraform : Plan"
+          run: |
+            terraform plan
+          working-directory: terraform-deploy-bind9-dns-records
+          env:
+            TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+        - name: "Terraform : Apply"
+          run: terraform apply -auto-approve
+          working-directory: terraform-deploy-bind9-dns-records
+          env:
+            TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+  ansible-configure-k3s-cluster:
+    needs: deploy-bind-9-records
+    runs-on: self-hosted
+    steps:
       - name: "Configure K3s cluster"
         working-directory: ansible/plays
         run: ansible-playbook -i inventory/hosts playbook-k3s-cluster.yaml
-        
- 

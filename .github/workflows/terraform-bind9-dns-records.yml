@@ -1,7 +1,7 @@
 name: Deploy Bind9 dns records
 
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:
