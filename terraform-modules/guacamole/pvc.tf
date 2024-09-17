@@ -14,6 +14,6 @@ resource "kubernetes_persistent_volume_claim" "postgresql_pvc" {
         storage = "1Gi"
       }
     }
-    volume_name = kubernetes_persistent_volume.postgres_pv.metadata[0].name
+    # volume_name = kubernetes_persistent_volume.postgres_pv.metadata[0].name
   }
 }
