@@ -16,6 +16,7 @@ virtual_machines = {
     vm_state         = "running"
     boot_order       = "order=scsi0"
     memory           = 4096
+    balloon_min      = 512
     cloudinit = {
       ipconfig = {
         ip      = "192.168.0.234/24"
@@ -32,6 +33,7 @@ virtual_machines = {
     vm_state         = "running"
     boot_order       = "order=scsi0"
     memory           = 4096
+    balloon_min      = 512
     cloudinit = {
       dns_server = "192.168.0.234"
       dns_domain = "internal.cbxon.co.uk"
@@ -49,6 +51,7 @@ virtual_machines = {
     vm_state         = "running"
     boot_order       = "order=scsi0"
     memory           = 4096
+    balloon_min      = 512
     cloudinit = {
       dns_server = "192.168.0.234"
       dns_domain = "internal.cbxon.co.uk"
@@ -66,6 +69,7 @@ virtual_machines = {
     vm_state         = "running"
     boot_order       = "order=scsi0"
     memory           = 4096
+    balloon_min      = 512
     cloudinit = {
       dns_server = "192.168.0.234"
       dns_domain = "internal.cbxon.co.uk"
@@ -75,24 +79,6 @@ virtual_machines = {
       }
     }
   }
-  # "k3s3" = {
-  #   qemu_agent       = 1
-  #   vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
-  #   name             = "k3s3"
-  #   desc             = "k3s deployed by Terraform & Configured with Ansible"
-  #   vm_state         = "running"
-  #   boot_order       = "order=scsi0"
-  #   memory           = 4096
-  #   balloon_min      = 512
-  #   cloudinit = {
-  #     dns_server = "192.168.0.234"
-  #     dns_domain = "internal.cbxon.co.uk"
-  #     ipconfig = {
-  #       ip      = "192.168.0.213/24"
-  #       gateway = "192.168.0.1"
-  #     }
-  #   }
-  # }
   "haproxy1" = {
     qemu_agent       = 1
     vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
