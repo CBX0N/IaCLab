@@ -4,5 +4,5 @@ variable "postgresql_password" {
 }
 variable "postgresql_data_path" {
   type    = string
-  default = "/var/lib/postgresql/data"
+  default = "/var/lib/postgresql/"
 }
