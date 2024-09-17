@@ -37,7 +37,7 @@ resource "kubernetes_deployment" "postgresql_deployment" {
           }
           env {
             name  = "PGDATA"
-            value = "var.postgresql_data_path"
+            value = var.postgresql_data_path
           }
           env {
             name = "POSTGRES_PASSWORD"
