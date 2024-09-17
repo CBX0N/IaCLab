@@ -37,7 +37,7 @@ resource "kubernetes_deployment" "postgresql_deployment" {
           }
           env {
             name  = "PGDATA"
-            value = "/var/lib/postgresql/data/guacamole/"
+            value = "/var/lib/postgresql/data/guacamole"
           }
           env {
             name = "POSTGRES_PASSWORD"
