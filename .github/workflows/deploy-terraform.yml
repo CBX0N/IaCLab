@@ -1,7 +1,7 @@
 name: Deploy Core Infrastructure
 
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:
