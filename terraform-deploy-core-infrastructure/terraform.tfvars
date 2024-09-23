@@ -84,7 +84,7 @@ virtual_machines = {
     vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
     name             = "haproxy1"
     desc             = "k3s deployed by Terraform & Configured with Ansible"
-    vm_state         = "running"
+    vm_state         = "stopped"
     boot_order       = "order=scsi0"
     memory           = 4096
     balloon_min      = 512
@@ -96,6 +96,25 @@ virtual_machines = {
         gateway = "192.168.0.1"
       }
       templatefile = "./cloud-inits/haproxy.cloud_config.tftpl"
+    }
+  }
+  "docker1" = {
+    qemu_agent       = 1
+    vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
+    name             = "docker1"
+    desc             = "k3s deployed by Terraform & Configured with Ansible"
+    # vm_state         = "running"
+    # boot_order       = "order=scsi0"
+    memory           = 4096
+    balloon_min      = 512
+    cloudinit = {
+      dns_server = "192.168.0.234"
+      dns_domain = "internal.cbxon.co.uk"
+      ipconfig = {
+        ip      = "192.168.0.242/24"
+        gateway = "192.168.0.1"
+      }
+      templatefile = "./cloud-inits/docker.cloud_config.tftpl"
     }
   }
 }

@@ -20,3 +20,11 @@ module "haproxy_vm" {
   vm_config         = var.virtual_machines[each.key]
   pve_connection    = var.pve_connection
 }
+
+module "docker_vm" {
+  for_each          = toset(["docker1"])
+  source            = "../terraform-modules/vm"
+  default_vm_config = var.default_vm_config
+  vm_config         = var.virtual_machines[each.key]
+  pve_connection    = var.pve_connection
+}
