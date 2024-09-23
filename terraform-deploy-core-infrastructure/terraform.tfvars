@@ -103,8 +103,8 @@ virtual_machines = {
     vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
     name             = "docker1"
     desc             = "k3s deployed by Terraform & Configured with Ansible"
-    # vm_state         = "running"
-    # boot_order       = "order=scsi0"
+    vm_state         = "running"
+    boot_order       = "order=scsi0"
     memory           = 4096
     balloon_min      = 512
     cloudinit = {
