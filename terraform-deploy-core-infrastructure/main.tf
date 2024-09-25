@@ -22,7 +22,7 @@ module "haproxy_vm" {
 }
 
 module "docker_vm" {
-  for_each          = toset(["docker1"])
+  for_each          = toset(["docker1","docker2"])
   source            = "../terraform-modules/vm"
   default_vm_config = var.default_vm_config
   vm_config         = var.virtual_machines[each.key]

@@ -117,4 +117,24 @@ virtual_machines = {
       templatefile = "./cloud-inits/docker.cloud_config.tftpl"
     }
   }
+  "docker2" = {
+    qemu_agent       = 1
+    vm_template_name = "ubuntu-noble-cloud-init-enabled-base-image"
+    name             = "docker2"
+    desc             = "k3s deployed by Terraform & Configured with Ansible"
+    vm_state         = "running"
+    # boot_order       = "order=scsi0"
+    memory           = 4096
+    balloon_min      = 512
+    cloudinit = {
+      dns_server = "192.168.0.234"
+      dns_domain = "internal.cbxon.co.uk"
+      ipconfig = {
+        ip      = "192.168.0.243/24"
+        gateway = "192.168.0.1"
+      }
+      templatefile = "./cloud-inits/docker.cloud_config.tftpl"
+    }
+  }
+
 }
