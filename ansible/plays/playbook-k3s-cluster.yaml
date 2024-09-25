@@ -5,7 +5,6 @@
   remote_user: ansible
   gather_facts: true
   roles:
-    - configure-os
     - install-k3s
 
 - name: Configure Cluster

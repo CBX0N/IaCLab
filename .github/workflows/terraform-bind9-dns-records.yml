@@ -1,32 +1,32 @@
-name: Deploy Bind9 dns records
+# name: Deploy Bind9 dns records
 
-on:
-  # push:
-  workflow_dispatch:
+# on:
+#   # push:
+#   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
-      - name: "Create Secrets Files"
-        working-directory: terraform-deploy-bind9-dns-records
-        run: |
-          touch secrets.auto.tfvars
-          echo 'bind9_key_secret="${{ secrets.BIND9_KEY_SECRET }}"' > secrets.auto.tfvars
-      - name: "Terraform : Init"
-        run: terraform init
-        working-directory: terraform-deploy-bind9-dns-records
-        env:
-          TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-      - name: "Terraform : Plan"
-        run: |
-          terraform plan
-        working-directory: terraform-deploy-bind9-dns-records
-        env:
-          TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-      - name: "Terraform : Apply"
-        run: terraform apply -auto-approve
-        working-directory: terraform-deploy-bind9-dns-records
-        env:
-          TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+# jobs:
+#   build:
+#     runs-on: self-hosted
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: "Create Secrets Files"
+#         working-directory: terraform-deploy-bind9-dns-records
+#         run: |
+#           touch secrets.auto.tfvars
+#           echo 'bind9_key_secret="${{ secrets.BIND9_KEY_SECRET }}"' > secrets.auto.tfvars
+#       - name: "Terraform : Init"
+#         run: terraform init
+#         working-directory: terraform-deploy-bind9-dns-records
+#         env:
+#           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#       - name: "Terraform : Plan"
+#         run: |
+#           terraform plan
+#         working-directory: terraform-deploy-bind9-dns-records
+#         env:
+#           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#       - name: "Terraform : Apply"
+#         run: terraform apply -auto-approve
+#         working-directory: terraform-deploy-bind9-dns-records
+#         env:
+#           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}

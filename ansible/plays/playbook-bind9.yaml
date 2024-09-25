@@ -5,5 +5,4 @@
   remote_user: ansible
   gather_facts: true
   roles:
-    - configure-os
     - configure-bind9

@@ -9,7 +9,7 @@ resource "kubernetes_service" "postgresql_service" {
   spec {
     type = "LoadBalancer"
     port {
-      port = 5432
+      port        = 5432
       target_port = 5432
     }
     selector = {
@@ -29,7 +29,7 @@ resource "kubernetes_service" "guacamole_service" {
   spec {
     type = "LoadBalancer"
     port {
-      port = 8080
+      port        = 8080
       target_port = 8080
     }
     selector = {
@@ -49,7 +49,7 @@ resource "kubernetes_service" "guacd_service" {
   spec {
     type = "LoadBalancer"
     port {
-      port = 4822
+      port        = 4822
       target_port = 4822
     }
     selector = {

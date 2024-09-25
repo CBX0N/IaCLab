@@ -1,3 +1,14 @@
+variable "proxmox_provider_settings" {
+  type = object({
+    api_token_id     = string
+    api_token_secret = string
+    api_url          = string
+    ssh_user         = string
+    ssh_password     = string
+    ssh_host         = string
+  })
+}
+
 variable "default_vm_config" {
   type = object({
     cores                    = number
@@ -9,8 +20,8 @@ variable "default_vm_config" {
   })
 }
 
-variable "vm_config" {
-  type = object({
+variable "virtual_machines" {
+  type = map(object({
     name             = string
     desc             = optional(string, null)
     boot_order       = optional(string, null)
@@ -37,16 +48,6 @@ variable "vm_config" {
       firewall = bool
       model    = string
     }))
-  })
-}
+  }))
 
-variable "pve_connection" {
-  type = object({
-    user             = string
-    password         = string
-    host             = string
-    api_token_id     = string
-    api_token_secret = string
-    api_url          = string
-  })
 }

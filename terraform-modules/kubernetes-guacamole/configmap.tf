@@ -18,7 +18,7 @@ resource "kubernetes_config_map" "guacamole_configmap" {
 
 
 resource "kubernetes_config_map" "guacamole_sql" {
-    metadata {
+  metadata {
     name = "guacamole-sql"
     labels = {
       app     = "guacamole"
@@ -26,7 +26,7 @@ resource "kubernetes_config_map" "guacamole_sql" {
     }
   }
   data = {
-    "001-create-schema.sql" = file("${path.module}/files/001-create-schema.sql")
+    "001-create-schema.sql"     = file("${path.module}/files/001-create-schema.sql")
     "002-create-admin-user.sql" = file("${path.module}/files/002-create-admin-user.sql")
   }
 }

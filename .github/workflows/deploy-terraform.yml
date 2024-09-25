@@ -1,72 +1,72 @@
-name: Deploy Core Infrastructure
+# name: Deploy Core Infrastructure
 
-on:
-  # push:
-  workflow_dispatch:
+# on:
+#   # push:
+#   workflow_dispatch:
 
-jobs:
-  terraform-deploy-core-infrastructure:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
-      - name: "Create Secrets Files"
-        working-directory: terraform-deploy-core-infrastructure
-        run: |
-          touch secrets.auto.tfvars
-          echo 'pve_connection={user="${{ secrets.proxmox_ssh_user }}",password="${{ secrets.proxmox_ssh_password }}",host="${{ secrets.proxmox_ssh_ip }}",api_url="${{ secrets.proxmox_url }}",api_token_id="${{ secrets.proxmox_user }}",api_token_secret="${{ secrets.proxmox_token }}"}' > secrets.auto.tfvars
-      - name: "Terraform : Init"
-        run: terraform init
-        working-directory: terraform-deploy-core-infrastructure
-        env:
-          TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-      - name: "Terraform : Plan"
-        run: |
-          terraform plan
-        working-directory: terraform-deploy-core-infrastructure
-        env:
-          TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-      - name: "Terraform : Apply"
-        run: terraform apply -auto-approve
-        working-directory: terraform-deploy-core-infrastructure
-        env:
-          TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-  ansible-configure-bind9-server:
-    needs: terraform-deploy-core-infrastructure
-    runs-on: self-hosted
-    steps:
-        - name: "Configure Bind9"
-          working-directory: ansible/plays
-          run: echo ""
-        #   run: ansible-playbook -i inventory/hosts playbook-bind9.yaml
-  terraform-deploy-bind-9-records:
-    needs: ansible-configure-bind9-server
-    runs-on: self-hosted
-    steps:
-        - name: "Create Secrets Files"
-          working-directory: terraform-deploy-bind9-dns-records
-          run: |
-            touch secrets.auto.tfvars
-            echo 'bind9_key_secret="${{ secrets.BIND9_KEY_SECRET }}"' > secrets.auto.tfvars
-        - name: "Terraform : Init"
-          run: terraform init
-          working-directory: terraform-deploy-bind9-dns-records
-          env:
-            TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-        - name: "Terraform : Plan"
-          run: |
-            terraform plan
-          working-directory: terraform-deploy-bind9-dns-records
-          env:
-            TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-        - name: "Terraform : Apply"
-          run: terraform apply -auto-approve
-          working-directory: terraform-deploy-bind9-dns-records
-          env:
-            TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
-  ansible-configure-k3s-cluster:
-    needs: terraform-deploy-bind-9-records
-    runs-on: self-hosted
-    steps:
-      - name: "Configure K3s cluster"
-        working-directory: ansible/plays
-        run: ansible-playbook -i inventory/hosts playbook-k3s-cluster.yaml
+# jobs:
+#   terraform-deploy-core-infrastructure:
+#     runs-on: self-hosted
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: "Create Secrets Files"
+#         working-directory: terraform-deploy-core-infrastructure
+#         run: |
+#           touch secrets.auto.tfvars
+#           echo 'pve_connection={user="${{ secrets.proxmox_ssh_user }}",password="${{ secrets.proxmox_ssh_password }}",host="${{ secrets.proxmox_ssh_ip }}",api_url="${{ secrets.proxmox_url }}",api_token_id="${{ secrets.proxmox_user }}",api_token_secret="${{ secrets.proxmox_token }}"}' > secrets.auto.tfvars
+#       - name: "Terraform : Init"
+#         run: terraform init
+#         working-directory: terraform-deploy-core-infrastructure
+#         env:
+#           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#       - name: "Terraform : Plan"
+#         run: |
+#           terraform plan
+#         working-directory: terraform-deploy-core-infrastructure
+#         env:
+#           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#       - name: "Terraform : Apply"
+#         run: terraform apply -auto-approve
+#         working-directory: terraform-deploy-core-infrastructure
+#         env:
+#           TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#   ansible-configure-bind9-server:
+#     needs: terraform-deploy-core-infrastructure
+#     runs-on: self-hosted
+#     steps:
+#         - name: "Configure Bind9"
+#           working-directory: ansible/plays
+#           run: echo ""
+#         #   run: ansible-playbook -i inventory/hosts playbook-bind9.yaml
+#   terraform-deploy-bind-9-records:
+#     needs: ansible-configure-bind9-server
+#     runs-on: self-hosted
+#     steps:
+#         - name: "Create Secrets Files"
+#           working-directory: terraform-deploy-bind9-dns-records
+#           run: |
+#             touch secrets.auto.tfvars
+#             echo 'bind9_key_secret="${{ secrets.BIND9_KEY_SECRET }}"' > secrets.auto.tfvars
+#         - name: "Terraform : Init"
+#           run: terraform init
+#           working-directory: terraform-deploy-bind9-dns-records
+#           env:
+#             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#         - name: "Terraform : Plan"
+#           run: |
+#             terraform plan
+#           working-directory: terraform-deploy-bind9-dns-records
+#           env:
+#             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#         - name: "Terraform : Apply"
+#           run: terraform apply -auto-approve
+#           working-directory: terraform-deploy-bind9-dns-records
+#           env:
+#             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_Token }}
+#   ansible-configure-k3s-cluster:
+#     needs: terraform-deploy-bind-9-records
+#     runs-on: self-hosted
+#     steps:
+#       - name: "Configure K3s cluster"
+#         working-directory: ansible/plays
+#         run: ansible-playbook -i inventory/hosts playbook-k3s-cluster.yaml

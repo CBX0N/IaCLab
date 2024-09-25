@@ -1,30 +1,23 @@
-resource "local_file" "cloud_init_user_data_file" {
+resource "local_file" "cloud_init_config_files" {
   count    = var.vm_config.cloudinit.templatefile != null ? 1 : 0
-  filename = "${path.module}/files/user_data_${var.vm_config.name}.cfg"
+  filename = "${path.module}/files/user_data_${var.vm_config.name}.yml"
   content  = templatefile(var.vm_config.cloudinit.templatefile, {})
-}
-
-resource "null_resource" "cloud_init_config_files" {
-  count = var.vm_config.cloudinit.templatefile != null ? 1 : 0
   connection {
     type     = "ssh"
-    user     = var.pve_connection.user
-    password = var.pve_connection.password
-    host     = var.pve_connection.host
+    user     = var.proxmox_provider_settings.ssh_user
+    password = var.proxmox_provider_settings.ssh_password
+    host     = var.proxmox_provider_settings.ssh_host
   }
 
   provisioner "file" {
     destination = "/var/lib/vz/snippets/user_data_${var.vm_config.name}.yml"
-    content     = local_file.cloud_init_user_data_file[0].content
-  }
-  lifecycle {
-    replace_triggered_by = [local_file.cloud_init_user_data_file]
+    content     = templatefile(var.vm_config.cloudinit.templatefile, {})
   }
 }
 
 resource "proxmox_vm_qemu" "vm" {
   depends_on = [
-    null_resource.cloud_init_config_files,
+    local_file.cloud_init_config_files,
   ]
   name        = var.vm_config.name
   boot        = var.vm_config.boot_order
