@@ -1,7 +1,7 @@
 resource "local_file" "cloud_init_config_files" {
   count    = var.vm_config.cloudinit.templatefile != null ? 1 : 0
   filename = "${path.module}/files/user_data_${var.vm_config.name}.yml"
-  content  = templatefile(var.vm_config.cloudinit.templatefile, {})
+  content  = templatefile(var.vm_config.cloudinit.templatefile, {hostname = var.vm_config.name})
   connection {
     type     = "ssh"
     user     = var.proxmox_provider_settings.ssh_user
@@ -11,7 +11,7 @@ resource "local_file" "cloud_init_config_files" {
 
   provisioner "file" {
     destination = "/var/lib/vz/snippets/user_data_${var.vm_config.name}.yml"
-    content     = templatefile(var.vm_config.cloudinit.templatefile, {})
+    content     = templatefile(var.vm_config.cloudinit.templatefile, {hostname = var.vm_config.name})
   }
 }
 

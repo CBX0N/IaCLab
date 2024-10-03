@@ -1,0 +1,6 @@
+---
+- name: Create Auth K3s Token
+  ansible.builtin.shell:
+    cmd: k3s token create
+  register: k3s_agent_join_token
+  run_once: true

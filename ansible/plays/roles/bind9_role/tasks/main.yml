@@ -1,0 +1,29 @@
+---
+- name: Install BIND9
+  ansible.builtin.apt:
+    name: "{{ bind9_package }}"
+    state: present
+    update_cache: true
+
+- name: Copy BIND9 config
+  ansible.builtin.template:
+    src: named.conf.j2
+    dest: /etc/bind/named.conf
+    owner: root
+    group: bind
+    mode: '0644'
+
+- name: Copy zone file config
+  ansible.builtin.template:
+    src: zone.j2
+    dest: /var/lib/bind/{{ bind9_primary_zone }}
+    owner: root
+    group: bind
+    mode: '0644'
+  notify: Restart BIND9 service
+
+- name: Ensure BIND9 is running and enabled
+  ansible.builtin.service:
+    name: "{{ bind9_service }}"
+    state: started
+    enabled: true

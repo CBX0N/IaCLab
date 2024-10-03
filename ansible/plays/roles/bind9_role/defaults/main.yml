@@ -1,0 +1,10 @@
+---
+bind9_package: "bind9"
+bind9_service: "bind9"
+bind9_primary_zone: ""
+bind9_tsig_key: ""
+bind9_tsig_key_cidr: ""
+bind9_primary_dns_forwarder: ""
+bind9_secondary_dns_forwarder: ""
+bind9_internal_ns1_ip: ""
+bind9_internal_domain_name: ""

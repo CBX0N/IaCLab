@@ -1,0 +1,11 @@
+---
+- name: Copy K3s service
+  ansible.builtin.template:
+    dest: /etc/systemd/system/k3s.service
+    src: k3s.service.j2
+
+- name: Enable & Start K3s service
+  ansible.builtin.systemd_service:
+    name: "{{ k3s_service }}"
+    enabled: true
+    state: started

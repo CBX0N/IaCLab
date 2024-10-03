@@ -1,0 +1,4 @@
+---
+- name: Install Longhorn
+  ansible.builtin.shell:
+    cmd: k3s kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/{{ k3s_longhorn_version }}/deploy/longhorn.yaml

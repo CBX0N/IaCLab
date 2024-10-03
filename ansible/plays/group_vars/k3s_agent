@@ -1,1 +1,3 @@
-k3s_master_url: "https://k3s00.internal.cbxon.co.uk:6443/"
+---
+k3s_master_url: "https://192.168.0.210:6443/"
+k3s_service_command: "k3s agent --server {{ k3s_master_url }} --token {{ k3s_agent_join_token.stdout }}"

@@ -1,0 +1,21 @@
+---
+- name: Disable UFW
+  ansible.builtin.include_tasks: disable-ufw.yml
+
+- name: Install Containerd
+  ansible.builtin.include_tasks: install-containerd.yml
+
+- name: Install K3s
+  ansible.builtin.include_tasks: install-k3s.yml
+
+- name: Configure K3s server
+  block: 
+    - ansible.builtin.include_tasks: configure-k3s.yml
+    - ansible.builtin.include_tasks: capture-k3s-token.yml
+    - ansible.builtin.include_tasks: install-longhorn.yml
+  when: "'k3s_server' in group_names"
+
+- name: Configure K3s agent
+  ansible.builtin.include_tasks: configure-k3s.yml
+  
+  when: "'k3s_agent' in group_names"

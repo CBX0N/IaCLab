@@ -5,12 +5,4 @@
   remote_user: ansible
   gather_facts: true
   roles:
-    - install-k3s
-
-- name: Configure Cluster
-  hosts: k3s
-  become: true
-  remote_user: ansible
-  gather_facts: true
-  roles:
-    - configure-k3s-cluster
+    - k3s_role

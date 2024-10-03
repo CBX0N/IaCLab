@@ -1,0 +1,27 @@
+
+controls {
+    inet * port 953
+    allow { {{ bind9_tsig_key_cidr }}; } keys { "tsig-key"; };
+};
+
+options {
+    directory "/var/cache/bind";
+	forwarders {
+	  {{ bind9_primary_dns_forwarder }};
+	  {{ bind9_secondary_dns_forwarder }};
+	};
+    dnssec-validation auto;
+    allow-query { any; };
+};
+
+zone "{{ bind9_primary_zone }}" IN {
+    type master;
+    file "/var/lib/bind/{{ bind9_primary_zone }}";
+    update-policy { grant tsig-key zonesub any; };
+};
+
+key "tsig-key" {
+        algorithm hmac-sha256;
+        secret "{{ bind9_tsig_key }}";
+};
+
