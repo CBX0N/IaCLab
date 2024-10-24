@@ -1,0 +1,17 @@
+---
+- name: Disable UFW
+  ansible.builtin.include_tasks: disable-ufw.yaml
+
+- name: Install Packages
+  ansible.builtin.include_tasks: install-packages.yaml
+
+- name: Configure K3s agent
+  ansible.builtin.include_tasks: configure-k3s.yaml
+
+- name: Configure Cluster
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+  loop:
+    - configure-cluster.yaml
+    - fetch-kube-config.yaml
+  when: "'K3S_SERVER' in group_names"

@@ -1,0 +1,20 @@
+- name: Configuring APT repositories
+  block:
+  - name: Add an Apt signing key, uses whichever key is at the URL
+    ansible.builtin.apt_key:
+      url: '{{ item.gpg_url }}'
+      state: present
+    with_items: '{{ apt_repositories }}'
+
+  - name: Adding apt source
+    ansible.builtin.apt_repository:
+      repo: "deb [arch=amd64] {{ item.repo }} {{ item.distro }} {{ item.stream }}"
+      state: present
+    with_items: '{{ apt_repositories }}'
+
+- name: Installing Packages
+  ansible.builtin.apt:
+    pkg: '{{ item }}'
+    state: present
+    update-cache: true
+  loop: '{{ additional_apt_packages }}'

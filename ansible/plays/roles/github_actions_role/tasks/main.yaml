@@ -1,0 +1,10 @@
+---
+- name: Install tooling on runner
+  ansible.builtin.include_tasks: install-tooling.yaml
+
+- name: Install Github Actions runner
+  ansible.builtin.include_tasks: install-runner.yaml
+
+- name: Configure Github Actions runner
+  ansible.builtin.include_tasks: configure-runner.yaml
+  run_once: true

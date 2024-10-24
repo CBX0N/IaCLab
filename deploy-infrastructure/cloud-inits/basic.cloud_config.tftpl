@@ -1,0 +1,11 @@
+#cloud-config
+locale: en_GB
+timezone: Europe/London
+users:
+  - name: ansible
+    groups: sudo, adm
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMJvrddIRBp6UWEim5D6jCPegLHwh+doe7c744GA7v/ github@ghb-01
+    lock_passwd: false
+    passwd: $6$rounds=4096$W9fcIpq.Zu0xiTWe$cJoYFTN/WWltuoQA7tniD/CjWkOB6J4z7cqYMYJTahg/uYRx.smGmDH2TaAg6/MoCyxx5uZYq7MBMtAiPHZLA/

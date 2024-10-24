@@ -1,0 +1,13 @@
+---
+- name: Grabbing Auth K3s Token
+  ansible.builtin.shell:
+    cmd: cat /var/lib/rancher/k3s/server/token
+  register: k3s_token
+  when: "'K3S_SERVER' in group_names"
+
+- name: Setting Token Fact
+  ansible.builtin.set_fact:
+    k3s_token: "{{ k3s_token.stdout }}"
+  delegate_facts: true
+  delegate_to: '{{ host }}'
+  when: "'K3S_SERVER' in group_names"

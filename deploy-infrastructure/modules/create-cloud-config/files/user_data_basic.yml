@@ -1,0 +1,16 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+  - qemu-guest-agent
+locale: en_GB
+timezone: Europe/
+users:
+  - name: ansible
+    groups: sudo, adm
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIES3MWtrYdJGdRLvp6oKl3SWHYGGcR725ZaZmu2+kcWx cbxon@lap
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID5sTuO+2jQT31zF2LIGOGnkTIGgWDrOIVxujrEArHeW github@ghb-01
+    lock_passwd: false
+    passwd: $6$rounds=4096$W9fcIpq.Zu0xiTWe$cJoYFTN/WWltuoQA7tniD/CjWkOB6J4z7cqYMYJTahg/uYRx.smGmDH2TaAg6/MoCyxx5uZYq7MBMtAiPHZLA/

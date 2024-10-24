@@ -1,0 +1,13 @@
+[K3S:children]
+K3S_SERVER
+K3S_AGENT
+
+[K3S_SERVER]
+k3s01.internal.cbxon.co.uk ansible_host=192.168.0.211
+
+[K3S_AGENT]
+k3s02.internal.cbxon.co.uk ansible_host=192.168.0.212
+k3s03.internal.cbxon.co.uk ansible_host=192.168.0.213
+
+[GITHUB_ACTIONS]
+ghb01.internal.cbxon.co.uk ansible_host=192.168.0.201

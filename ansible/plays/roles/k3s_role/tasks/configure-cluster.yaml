@@ -1,0 +1,18 @@
+---
+- name: Create namespaces
+  ansible.builtin.shell:
+    cmd: k3s kubectl create ns {{ namespace }}
+  loop_control:
+    loop_var: namespace
+  loop:
+    - terraform
+    # - argocd
+  ignore_errors: true
+
+# - name: Install Longhorn
+#   ansible.builtin.shell:
+#     cmd: k3s kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/{{ k3s_longhorn_version }}/deploy/longhorn.yaml
+
+# - name: Install Argocd
+#   ansible.builtin.shell:
+#     cmd: k3s kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml

@@ -1,0 +1,9 @@
+---
+- name: Configure Github Actions runners
+  hosts: GITHUB_ACTIONS
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  roles:
+    - environment_role
+    - github_actions_role
