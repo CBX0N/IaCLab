@@ -4,31 +4,54 @@ variable "argocd_url" {
 
 variable "longhorn" {
   type = object({
-    name = string
-    version = string
+    name       = string
+    version    = optional(string, null)
     repository = string
-    enabled = bool
+    enabled    = bool
+    variables = optional(list(object({
+      variable = string
+      content  = string
+    })), null)
   })
 }
 
 variable "ingress-nginx" {
   type = object({
-    name = string
-    version = string
+    name       = string
+    version    = optional(string, null)
     repository = string
-    enabled = bool
+    enabled    = bool
+    variables = optional(list(object({
+      variable = string
+      content  = string
+    })), null)
   })
 }
 
 variable "argocd" {
   type = object({
-    name = string
-    version = string
+    name       = string
+    version    = optional(string, null)
     repository = string
-    enabled = bool
-    variables = list(object({
+    namespace  = string
+    enabled    = bool
+    variables = optional(list(object({
       variable = string
-      content = string
-    }))
+      content  = string
+    })), null)
+  })
+}
+
+variable "metallb" {
+  type = object({
+    name       = string
+    version    = optional(string, null)
+    repository = string
+    namespace  = string
+    enabled    = bool
+    variables = optional(list(object({
+      variable = string
+      content  = string
+    })), null)
   })
 }
