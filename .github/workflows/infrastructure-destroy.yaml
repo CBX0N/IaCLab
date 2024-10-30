@@ -23,6 +23,9 @@ jobs:
         name: Terraform Destroy
         runs-on: self-hosted
         needs: [ configure-runner ]
+        defaults:
+            run:
+                working-directory: deploy-infrastructure
         env:
             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_TOKEN }}
         steps:
@@ -30,7 +33,3 @@ jobs:
             - run: ansible-vault decrypt secrets.terraform.auto.tfvars
             - run: terraform init
             - run: terraform destroy --auto-approve
-
-defaults:
-    run:
-        working-directory: deploy-infrastructure
