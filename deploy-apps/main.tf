@@ -38,8 +38,8 @@ resource "helm_release" "argocd" {
   dynamic "set" {
     for_each = var.argocd.variables
     content {
-      name = set.variable
-      value = set.value
+      name = set.value["variable"]
+      value = set.value["value"]
     }
   }
 }
