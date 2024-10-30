@@ -9,8 +9,8 @@ resource "helm_release" "metallb" {
   dynamic "set" {
     for_each = var.metallb.variables != null ? var.metallb.variables : []
     content {
-      name  = set.value["variable"]
-      value = set.value["value"]
+      name  = set.value.variable
+      value = set.value.content
     }
   }
 }
@@ -26,8 +26,8 @@ resource "helm_release" "ingress-nginx" {
   dynamic "set" {
     for_each = var.ingress-nginx.variables != null ? var.ingress-nginx.variables : []
     content {
-      name  = set.value["variable"]
-      value = set.value["value"]
+      name  = set.value.variable
+      value = set.value.content
     }
   }
 }
@@ -43,8 +43,8 @@ resource "helm_release" "longhorn" {
   dynamic "set" {
     for_each = var.longhorn.variables != null ? var.longhorn.variables : []
     content {
-      name  = set.value["variable"]
-      value = set.value["value"]
+      name  = set.value.variable
+      value = set.value.content
     }
   }
 }
@@ -61,8 +61,8 @@ resource "helm_release" "argocd" {
   dynamic "set" {
     for_each = var.argocd.variables != null ? var.argocd.variables : []
     content {
-      name  = set.value["variable"]
-      value = set.value["value"]
+      name  = set.value.variable
+      value = set.value.content
     }
   }
 }
