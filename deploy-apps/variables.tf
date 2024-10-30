@@ -33,7 +33,7 @@ variable "argocd" {
     name       = string
     version    = optional(string, null)
     repository = string
-    namespace  = string
+    namespace    = optional(string,null)
     enabled    = bool
     variables = optional(list(object({
       variable = string
@@ -47,7 +47,7 @@ variable "metallb" {
     name       = string
     version    = optional(string, null)
     repository = string
-    namespace  = string
+    namespace    = optional(string,null)
     enabled    = bool
     variables = optional(list(object({
       variable = string
