@@ -7,7 +7,7 @@ resource "helm_release" "metallb" {
   cleanup_on_fail  = true
   version          = var.metallb.version
   dynamic "set" {
-    for_each = var.metallb.variables
+    for_each = var.metallb.variables != null ? var.metallb.variables : []
     content {
       name  = set.value.variable
       value = set.value.value
@@ -24,7 +24,7 @@ resource "helm_release" "ingress-nginx" {
   cleanup_on_fail  = true
   version          = var.ingress-nginx.version
   dynamic "set" {
-    for_each = var.ingress-nginx.variables
+    for_each = var.ingress-nginx.variables != null ? var.ingress-nginx.variables : []
     content {
       name  = set.value.variable
       value = set.value.value
@@ -41,7 +41,7 @@ resource "helm_release" "longhorn" {
   cleanup_on_fail  = true
   version          = var.longhorn.version
   dynamic "set" {
-    for_each = var.longhorn.variables
+    for_each = var.longhorn.variables != null ? var.longhorn.variables : []
     content {
       name  = set.value.variable
       value = set.value.value
@@ -59,7 +59,7 @@ resource "helm_release" "argocd" {
   cleanup_on_fail  = true
   version          = var.argocd.version
   dynamic "set" {
-    for_each = var.argocd.variables
+    for_each = var.argocd.variables != null ? var.argocd.variables : []
     content {
       name  = set.value.variable
       value = set.value.value
