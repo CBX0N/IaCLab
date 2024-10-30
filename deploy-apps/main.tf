@@ -4,41 +4,42 @@ resource "helm_release" "metallb" {
   repository       = "https://metallb.github.io/metallb"
   create_namespace = true
   cleanup_on_fail  = true
+  count = 0
 }
 
 resource "helm_release" "ingress-nginx" {
-  name             = "ingress-nginx"
-  chart            = "ingress-nginx"
-  repository       = "https://kubernetes.github.io/ingress-nginx"
+  name             = var.ingress-nginx.name
+  chart            = var.ingress-nginx.name
+  repository       = var.ingress-nginx.repository
   create_namespace = true
   cleanup_on_fail  = true
-  version          = "4.11.3"
+  version          = var.ingress-nginx.version
+  count = var.ingress-nginx.enabled == true ? 1 : 0
 }
 
 resource "helm_release" "longhorn" {
-  name             = "longhorn"
-  chart            = "longhorn"
-  repository       = "https://charts.longhorn.io"
+  name             = var.longhorn.name
+  chart            = var.longhorn.name
+  repository       = var.longhorn.repository
   create_namespace = true
   cleanup_on_fail  = true
-  version          = "1.7.2"
+  version          = var.longhorn.version
+  count = var.longhorn.enabled == true ? 1 : 0
 }
 
 resource "helm_release" "argocd" {
-  name             = "argo-cd"
-  chart            = "argo-cd"
-  repository       = "https://argoproj.github.io/argo-helm"
+  name             = var.argocd.name
+  chart            = var.argocd.name
+  repository       = var.argocd.repository
   create_namespace = true
   cleanup_on_fail  = true
-  version          = "7.6.12"
+  version          = var.argocd.version
 
-  set {
-    name  = "configs.secret.argocdServerAdminPassword"
-    value = var.argocd_server_admin_password
-  }
-  set {
-    name = "server.ingress.enabled"
-    value = "true"
+  dynamic "set" {
+    for_each = var.argocd.variables
+    content {
+      name = set.variable
+      value = set.value
+    }
   }
 }
-
