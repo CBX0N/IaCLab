@@ -3,6 +3,7 @@ argocd_url = "192.168.0.211"
 longhorn = {
   name       = "longhorn"
   repository = "https://charts.longhorn.io"
+  namespace  = "longhorn"
   version    = "1.7.2"
   enabled    = true
 }

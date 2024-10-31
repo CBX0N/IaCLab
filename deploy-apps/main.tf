@@ -3,6 +3,7 @@ resource "helm_release" "metallb" {
   name             = var.metallb.name
   chart            = var.metallb.name
   repository       = var.metallb.repository
+  namespace        = var.metallb.namespace
   create_namespace = true
   cleanup_on_fail  = true
   version          = var.metallb.version
@@ -20,6 +21,7 @@ resource "helm_release" "ingress-nginx" {
   name             = var.ingress-nginx.name
   chart            = var.ingress-nginx.name
   repository       = var.ingress-nginx.repository
+  namespace        = var.ingress-nginx.namespace
   create_namespace = true
   cleanup_on_fail  = true
   version          = var.ingress-nginx.version
@@ -37,6 +39,7 @@ resource "helm_release" "longhorn" {
   name             = var.longhorn.name
   chart            = var.longhorn.name
   repository       = var.longhorn.repository
+  namespace        = var.longhorn.namespace
   create_namespace = true
   cleanup_on_fail  = true
   version          = var.longhorn.version
