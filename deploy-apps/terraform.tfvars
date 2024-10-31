@@ -6,10 +6,6 @@ longhorn = {
   namespace  = "longhorn"
   version    = "1.7.2"
   enabled    = true
-  variables = [ {
-    variable = "meta.helm.sh/release-namespace"
-    content =  "longhorn"
-  } ]
 }
 
 ingress-nginx = {
