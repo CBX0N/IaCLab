@@ -18,5 +18,6 @@ ingress-nginx = {
 metallb = {
   name       = "metallb"
   repository = "https://metallb.github.io/metallb"
+  namespace = "metallb-system"
   enabled    = true
 }
