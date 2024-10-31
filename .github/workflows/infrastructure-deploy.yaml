@@ -52,7 +52,7 @@ jobs:
                 working-directory: deploy-infrastructure
         env:
             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_TOKEN }}
-            tfplan-proxmox: ${{ needs.terraform-plan-proxmox.outputs.tfplan}}
+            tfplan: ${{ needs.terraform-plan-proxmox.outputs.tfplan}}
         steps:
             - if: env.tfplan == 2
               run: |
@@ -84,8 +84,8 @@ jobs:
                 set +e
                 terraform plan -detailed-exitcode
                 echo "exitcode=$?" >> "$GITHUB_OUTPUT"
-                id: tfplan
-                continue-on-error: true
+              id: tfplan
+              continue-on-error: true
 
     terraform-deploy-helm:
         name: Deploy Terraform - Helm Charts
