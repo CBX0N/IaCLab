@@ -12,11 +12,11 @@ ingress-nginx = {
   name       = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   version    = "4.11.3"
-  enabled    = false
+  enabled    = true
 }
 
 metallb = {
   name       = "metallb"
   repository = "https://metallb.github.io/metallb"
-  enabled    = false
+  enabled    = true
 }
