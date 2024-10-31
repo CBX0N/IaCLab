@@ -25,6 +25,9 @@ jobs:
         name: Terraform Plan - Proxmox VM's
         runs-on: self-hosted
         needs: [ configure-runner ]
+        defaults:
+            run:
+                working-directory: deploy-infrastructure
         outputs:
             tfplan: ${{ steps.tfplan.outputs.exitcode }}
         env:
@@ -44,6 +47,9 @@ jobs:
         name: Deploy Terraform - Proxmox VM's
         runs-on: self-hosted
         needs: [ terraform-plan-proxmox ]
+        defaults:
+            run:
+                working-directory: deploy-infrastructure
         env:
             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_TOKEN }}
             tfplan-proxmox: ${{ needs.terraform-plan-proxmox.outputs.tfplan}}
