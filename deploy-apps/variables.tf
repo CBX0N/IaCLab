@@ -7,6 +7,7 @@ variable "longhorn" {
     name       = string
     version    = optional(string, null)
     repository = string
+    namespace  = optional(string, null)
     enabled    = bool
     variables = optional(list(object({
       variable = string
@@ -20,6 +21,7 @@ variable "ingress-nginx" {
     name       = string
     version    = optional(string, null)
     repository = string
+    namespace  = optional(string, null)
     enabled    = bool
     variables = optional(list(object({
       variable = string
@@ -33,7 +35,7 @@ variable "argocd" {
     name       = string
     version    = optional(string, null)
     repository = string
-    namespace    = optional(string,null)
+    namespace  = optional(string, null)
     enabled    = bool
     variables = optional(list(object({
       variable = string
@@ -47,7 +49,7 @@ variable "metallb" {
     name       = string
     version    = optional(string, null)
     repository = string
-    namespace    = optional(string,null)
+    namespace  = optional(string, null)
     enabled    = bool
     variables = optional(list(object({
       variable = string
