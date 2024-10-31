@@ -21,8 +21,8 @@ jobs:
                 git config --global user.name "Actions Runner"
                 echo "${{ secrets.ANSIBLE_VAULT }}" > ~/.ansible/cbxon-vault.pass
 
-    terraform-plan:
-        name: Terraform Plan
+    terraform-plan-proxmox:
+        name: Terraform Plan - Proxmox VM's
         runs-on: self-hosted
         needs: [ configure-runner ]
         outputs:
@@ -40,13 +40,13 @@ jobs:
               id: tfplan
               continue-on-error: true
 
-    terraform-deploy:
-        name: Deploy Terraform
+    terraform-deploy-proxmox:
+        name: Deploy Terraform - Proxmox VM's
         runs-on: self-hosted
-        needs: [ terraform-plan ]
+        needs: [ terraform-plan-proxmox ]
         env:
             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_TOKEN }}
-            tfplan: ${{ needs.terraform-plan.outputs.tfplan}}
+            tfplan-proxmox: ${{ needs.terraform-plan-proxmox.outputs.tfplan}}
         steps:
             - if: env.tfplan == 2
               run: |
@@ -55,12 +55,42 @@ jobs:
     ansible-run:
         name: Ansible Run
         runs-on: self-hosted
-        needs: [ terraform-deploy ]
+        needs: [ terraform-deploy-proxmox ]
         steps:
             - run: ansible-playbook -i inventory/hosts playbook-k3s-cluster.yaml
               working-directory: ansible/plays
             - run: sed -i 's/127.0.0.1/192.168.0.211/' ~/.kube/config
 
-defaults:
-    run:
-        working-directory: deploy-infrastructure
+    terraform-plan-helm:
+        name: Terraform Plan - Helm Charts
+        runs-on: self-hosted
+        needs: [ ansible-run ]
+        defaults:
+            run:
+                working-directory: deploy-apps
+        outputs:
+            tfplan: ${{ steps.tfplan.outputs.exitcode }}
+        steps:
+            - uses: actions/checkout@v4
+            - run: ansible-vault decrypt secrets.terraform.auto.tfvars
+            - run: terraform init
+            - run: |
+                set +e
+                terraform plan -detailed-exitcode
+                echo "exitcode=$?" >> "$GITHUB_OUTPUT"
+                id: tfplan
+                continue-on-error: true
+
+    terraform-deploy-helm:
+        name: Deploy Terraform - Helm Charts
+        runs-on: self-hosted
+        needs: [ terraform-plan-helm ]
+        defaults:
+            run:
+                working-directory: deploy-apps
+        env:
+            tfplan: ${{ needs.terraform-plan-helm.outputs.tfplan}}
+        steps:
+            - if: env.tfplan == 2
+              run: |
+                terraform apply --auto-approve
