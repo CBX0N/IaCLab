@@ -1,0 +1,27 @@
+#cloud-config
+locale: en_GB
+timezone: Europe/London
+package_reboot_if_required: true
+package_update: true
+package_upgrade: true
+packages:
+  - containerd
+  - unzip
+  - nfs-
+  - wget
+users:
+  - name: ansible
+    groups: sudo, adm
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMJvrddIRBp6UWEim5D6jCPegLHwh+doe7c744GA7v/ github@ghb-01
+    lock_passwd: false
+    passwd: $6$rounds=4096$W9fcIpq.Zu0xiTWe$cJoYFTN/WWltuoQA7tniD/CjWkOB6J4z7cqYMYJTahg/uYRx.smGmDH2TaAg6/MoCyxx5uZYq7MBMtAiPHZLA/
+Runcmd:
+  - mkdir -p /opt/cni/bin
+  - mkdir -p /var/lib/rancher/k3s/agent/images/
+  - wget https://github.com/containernetworking/plugins/releases/download/v1.5.1/cni-plugins-linux-amd64-v1.5.1.tgz -o /tmp/cni-plugins-linux-amd64-v1.5.1.tgz
+  - wget https://github.com/k3s-io/k3s/releases/download/v1.29.7%2Bk3s1/k3s-airgap-images-amd64.tar.gz -o /tmp/k3s-airgap-images-amd64.tar.gz
+  - wget https://github.com/k3s-io/k3s/releases/download/v1.30.0%2Bk3s1/k3s -o /usr/local/bin/k3s
+  - tar -xvzf /tmp/cni-plugins-linux-amd64-v1.5.1.tar.gz -C /opt/cni/bin
+  - tar -xvzf /tmp/k3s-airgap-images-amd64.tar.gz -C /var/lib/rancher/k3s/agent/images/
