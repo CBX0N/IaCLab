@@ -1,2 +1,5 @@
-*.qcow2
-*.iso
+.terraform
+.terraform.lock.hcl
+*.tfstate*
+.vscode
+user_data_*

@@ -1,0 +1,16 @@
+---
+- name: Configure runner
+  ansible.builtin.shell:
+    chdir: /opt/actions-runner
+    cmd: "./config.sh --url {{ actions_repo_url }} --token {{ actions_join_token }} --unattended"
+  become: false
+
+- name: Setup Service
+  ansible.builtin.shell:
+    chdir: /opt/actions-runner
+    cmd: /opt/actions-runner/svc.sh install
+
+- name: Start Service
+  ansible.builtin.shell:
+    chdir: /opt/actions-runner
+    cmd: /opt/actions-runner/svc.sh start

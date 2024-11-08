@@ -1,0 +1,26 @@
+---
+- name: Installing Packages
+  ansible.builtin.apt:
+    pkg: '{{ item }}'
+    state: present
+    update-cache: true
+  loop: '{{ apt_packages }}'
+
+- name: Setting Hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Set SSH Authorized Keys
+  ansible.posix.authorized_key:
+    user: '{{ ansible_user }}'
+    state: present
+    key: '{{ item }}'
+  with_file: '{{ ssh_authorized_keys }}'
+
+- name: Create SSH Private Key
+  ansible.builtin.copy:
+    dest: "/home/{{ ansible_user }}/.ssh/id_ed25519"
+    content: "{{ ssh_private_key }}"
+    owner: '{{ ansible_user }}'
+    mode: "0600"
+  when: create_ssh_private_key

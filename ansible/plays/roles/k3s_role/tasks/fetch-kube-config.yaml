@@ -1,0 +1,8 @@
+---
+- name: Fetch kubeconfig
+  block:
+    - name: Pull kubeconfig
+      ansible.builtin.fetch:
+        src: "/etc/rancher/k3s/k3s.yaml"
+        dest: "~/.kube/config"
+        flat: true

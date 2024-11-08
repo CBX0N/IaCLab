@@ -1,0 +1,30 @@
+#cloud-config
+locale: en_GB
+timezone: Europe/London
+package_reboot_if_required: true
+package_update: true
+package_upgrade: true
+hostname: ${hostname}
+packages:
+  - qemu-guest-agent
+  - containerd
+  - unzip
+  - nfs-common
+users:
+  - name: ansible
+    groups: sudo, adm
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDMJvrddIRBp6UWEim5D6jCPegLHwh+doe7c744GA7v/ github@ghb-01
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjX0kDFSxu41RfqJOytpKePct4PrWpwvKkjbEMvhbTV root@pve
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIES3MWtrYdJGdRLvp6oKl3SWHYGGcR725ZaZmu2+kcWx cbxon@lap
+    lock_passwd: false
+    passwd: $6$rounds=4096$W9fcIpq.Zu0xiTWe$cJoYFTN/WWltuoQA7tniD/CjWkOB6J4z7cqYMYJTahg/uYRx.smGmDH2TaAg6/MoCyxx5uZYq7MBMtAiPHZLA/
+runcmd:
+  - sudo mkdir -p /var/lib/rancher/k3s/agent/images/
+  - sudo curl -L -o /var/lib/rancher/k3s/agent/images/k3s-airgap-images-amd64.tar.zst "https://github.com/k3s-io/k3s/releases/download/v1.29.1-rc2%2Bk3s1/k3s-airgap-images-amd64.tar.zst"
+  - sudo curl -L -o  /usr/local/bin/k3s "https://github.com/k3s-io/k3s/releases/download/v1.30.0%2Bk3s1/k3s" && sudo chmod +x /usr/local/bin/k3s
+  - sudo curl -L -o /etc/systemd/system/k3s.service "https://raw.githubusercontent.com/k3s-io/k3s/refs/heads/master/k3s.service"
+  - sudo tar --zstd --remove-files -xvf /var/lib/rancher/k3s/agent/images/k3s-airgap-images-amd64.tar.zst -C /var/lib/rancher/k3s/agent/images/
+  - sudo sed -i "s/k3s server/k3s server --token ${cluster_token} ${service_run_command}/" /etc/systemd/system/k3s.service
+  - sudo systemctl start k3s && sudo systemctl enable k3s
