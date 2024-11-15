@@ -1,0 +1,10 @@
+name: Check External IP
+on:
+    workflow_dispatch: 
+
+jobs:
+    configure-runner:
+        name: Check IP
+        runs-on: self-hosted
+        steps:
+            - run: curl icanhazip.com

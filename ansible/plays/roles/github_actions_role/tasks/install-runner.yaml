@@ -1,0 +1,21 @@
+- name: Create directory for Actions runner
+  ansible.builtin.file:
+    path: /opt/actions-runner
+    state: directory
+    mode: "0755"
+
+- name: Download Actions runner
+  ansible.builtin.get_url:
+    url: "https://github.com/actions/runner/releases/download/v{{ runner_version }}/actions-runner-{{ runner_arch }}-{{ runner_version }}.tar.gz"
+    dest: "/opt/actions-runner/actions-runner-{{ runner_arch }}-{{ runner_version }}.tar.gz"
+    mode: "0755"
+
+- name: Extract Actions runner
+  ansible.builtin.unarchive:
+    src: "/opt/actions-runner/actions-runner-{{ runner_arch }}-{{ runner_version }}.tar.gz"
+    dest: /opt/actions-runner/
+    mode: "0755"
+
+- name: Install dependencies
+  ansible.builtin.shell:
+    cmd: /opt/actions-runner/bin/installdependencies.sh

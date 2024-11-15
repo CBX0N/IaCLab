@@ -1,0 +1,38 @@
+name: Destroy Infrastructure
+on:
+    workflow_dispatch: 
+
+jobs:
+    configure-runner:
+        name: Configure Runner
+        runs-on: self-hosted
+        steps:
+            - run: |
+                echo "Host *" > ~/.ssh/config
+                echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+                echo "Host github.com" >> ~/.ssh/config
+                echo "  User git" >> ~/.ssh/config
+                echo "[defaults]" > ~/.ansible.cfg
+                echo "vault_id_match = true" >> ~/.ansible.cfg
+                echo "vault_identity_list = cbxon@~/.ansible/cbxon-vault.pass" >> ~/.ansible.cfg
+                git config --global user.email "runner@cbxon.co.uk"
+                git config --global user.name "Actions Runner"
+                echo "${{ secrets.ANSIBLE_VAULT }}" > ~/.ansible/cbxon-vault.pass
+
+    terraform-destroy:
+        name: Terraform Destroy
+        runs-on: self-hosted
+        needs: [ configure-runner ]
+        defaults:
+            run:
+                working-directory: deploy-cluster
+        env:
+            TF_TOKEN_app_terraform_io: ${{ secrets.HCP_TOKEN }}
+            TF_VAR_onepassword_service_account_token: ${{ secrets.ONEPASSWORD_TOKEN }}
+            TF_WORKSPACE: "cluster_deploy_dev"
+            TF_CLOUD_ORGANIZATION: "cbxon"
+            TF_VAR_environment: dev
+        steps:
+            - uses: actions/checkout@v4
+            - run: terraform init
+            - run: terraform destroy -var-file env/dev/terraform.tfvars --auto-approve

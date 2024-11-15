@@ -1,0 +1,15 @@
+- name: Start k3s servers
+  ansible.builtin.include_tasks: "configure-k3s-service.yaml"
+  when: "'K3S_SERVER' in group_names"
+
+- name: Set K3s_token value
+  ansible.builtin.include_tasks: "capture-k3s-token.yaml"
+  when: "'K3S_SERVER' in group_names"
+  with_inventory_hostnames:
+  - K3S_AGENT
+  vars:
+    host: "{{ item }}"
+
+- name: Start k3s agents
+  ansible.builtin.include_tasks: "configure-k3s-service.yaml"
+  when: "'K3S_AGENT' in group_names"

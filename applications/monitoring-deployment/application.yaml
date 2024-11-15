@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+spec:
+  project: default
+  destination:
+    name: ''
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  source:
+    path: applications/monitoring-deployment
+    repoURL: https://github.com/CBX0N/ChatGPT-Lab-Project.git
+    targetRevision: cluster-monitoring
+    helm:
+      valueFiles:
+        - values.yaml

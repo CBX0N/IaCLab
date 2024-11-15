@@ -1,0 +1,9 @@
+---
+- name: Configure K3s Cluster
+  hosts: K3S
+  become: true
+  remote_user: ansible
+  gather_facts: false
+  roles:
+    - environment_role
+    - k3s_role
