@@ -5,6 +5,7 @@ resource "local_file" "kubeconfig" {
 }
 
 resource "github_repository" "this" {
+  depends_on = [local_file.kubeconfig]
   name        = var.github_repository
   description = var.github_repository
   visibility  = "private"
