@@ -23,7 +23,7 @@ provider "onepassword" {
 
 provider "flux" {
   kubernetes = {
-    config_path = "${path.cwd}/k3s.yaml"
+    config_path = local_file.kubeconfig.filename
   }
   git = {
     url = "https://github.com/${var.github_org}/${var.github_repository}.git"
