@@ -29,7 +29,7 @@ resource "onepassword_item" "kubeconfig" {
 
 resource "local_file" "kubeconfig" {
   content  = module.k3s_cluster.kubeconfig
-  filename = "${path.cwd}/k3s.yaml"
+  filename = "~/.kube/k3s.yaml"
 }
 
 resource "time_sleep" "wait_5m" {
