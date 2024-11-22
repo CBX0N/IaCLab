@@ -10,6 +10,12 @@ variable "github_repository" {
   default     = ""
 }
 
+variable "github_repository_visibility" {
+  description = "GitHub repository visibility"
+  type        = string
+  default     = "private"
+}
+
 variable "onepassword_service_account_token" {
   type = string
 }

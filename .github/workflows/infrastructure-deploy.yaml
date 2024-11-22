@@ -36,7 +36,6 @@ jobs:
             TF_WORKSPACE: "cluster_deploy_dev"
             TF_CLOUD_ORGANIZATION: "cbxon"
             TF_VAR_environment: dev
-
         steps:
             - uses: actions/checkout@v4
             - run: terraform init

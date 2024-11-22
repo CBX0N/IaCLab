@@ -4,16 +4,16 @@ resource "local_file" "kubeconfig" {
     filename = "${path.cwd}/k3s.yaml"
 }
 
-resource "github_repository" "this" {
+resource "github_repository" "fluxcd" {
   depends_on = [local_file.kubeconfig]
   name        = var.github_repository
   description = var.github_repository
-  visibility  = "private"
+  visibility  = var.github_repository_visibility 
   auto_init   = true
 }
 
-resource "flux_bootstrap_git" "this" {
-  depends_on = [github_repository.this]
+resource "flux_bootstrap_git" "repository" {
+  depends_on = [github_repository.fluxcd]
   embedded_manifests = true
   path               = "clusters/"
 }

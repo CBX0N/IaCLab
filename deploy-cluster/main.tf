@@ -1,5 +1,5 @@
 module "k3s_cluster" {
-  source            = "github.com/CBX0N/proxmox-create-k3s-cluster?ref=v1.0.3"
+  source            = "github.com/CBX0N/proxmox-create-k3s-cluster?ref=v1.0.4"
   proxmox_vm_config = var.proxmox_vm_config
   nodes             = var.nodes
   cluster_config = {
