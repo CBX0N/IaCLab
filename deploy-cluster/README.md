@@ -1,35 +1,37 @@
 <!-- BEGIN_TF_DOCS -->
-## Requirements
 
-The following requirements are needed by this module:
-
-- <a name="requirement_onepassword"></a> [onepassword](#requirement\_onepassword) (2.1.2)
-
-- <a name="requirement_proxmox"></a> [proxmox](#requirement\_proxmox) (3.0.1-rc4)
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_onepassword"></a> [onepassword](#provider\_onepassword) (2.1.2)
+- <a name="provider_onepassword"></a> [onepassword](#provider\_onepassword)
 
 ## Modules
 
 The following Modules are called:
 
+### <a name="module_fluxcd_bootstrap"></a> [fluxcd\_bootstrap](#module\_fluxcd\_bootstrap)
+
+Source: github.com/CBX0N/bootstrap-fluxcd-github
+
+Version:
+
 ### <a name="module_k3s_cluster"></a> [k3s\_cluster](#module\_k3s\_cluster)
 
 Source: github.com/CBX0N/proxmox-create-k3s-cluster
 
-Version: v1.0.0
+Version: v1.0.4
 
 ## Resources
 
 The following resources are used by this module:
 
-- [onepassword_item.cluster_ssh_keys](https://registry.terraform.io/providers/1Password/onepassword/2.1.2/docs/data-sources/item) (data source)
-- [onepassword_item.proxmox_api](https://registry.terraform.io/providers/1Password/onepassword/2.1.2/docs/data-sources/item) (data source)
-- [onepassword_item.proxmox_ssh](https://registry.terraform.io/providers/1Password/onepassword/2.1.2/docs/data-sources/item) (data source)
+- [onepassword_item.kubeconfig](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/resources/item) (resource)
+- [onepassword_item.cluster_ssh_keys](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/item) (data source)
+- [onepassword_item.github_token](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/item) (data source)
+- [onepassword_item.proxmox_api](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/item) (data source)
+- [onepassword_item.proxmox_ssh](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/item) (data source)
 
 ## Required Inputs
 
@@ -55,6 +57,12 @@ object({
   })
 ```
 
+### <a name="input_environment"></a> [environment](#input\_environment)
+
+Description: n/a
+
+Type: `string`
+
 ### <a name="input_nodes"></a> [nodes](#input\_nodes)
 
 Description: n/a
@@ -76,8 +84,9 @@ Type:
 
 ```hcl
 object({
-    proxmox_ssh = string
-    proxmox_api = string
+    proxmox_ssh  = string
+    proxmox_api  = string
+    github_token = string
   })
 ```
 
@@ -118,4 +127,32 @@ object({
     cloudinit_location = optional(string, "local-lvm")
   })
 ```
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
+
+### <a name="input_github_org"></a> [github\_org](#input\_github\_org)
+
+Description: GitHub organization
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_github_repository"></a> [github\_repository](#input\_github\_repository)
+
+Description: GitHub repository
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_github_repository_visibility"></a> [github\_repository\_visibility](#input\_github\_repository\_visibility)
+
+Description: GitHub repository visibility
+
+Type: `string`
+
+Default: `"private"`
 <!-- END_TF_DOCS -->
