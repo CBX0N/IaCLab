@@ -15,13 +15,13 @@ The following Modules are called:
 
 Source: github.com/CBX0N/bootstrap-fluxcd-github
 
-Version:
+Version: v1.0.1
 
 ### <a name="module_k3s_cluster"></a> [k3s\_cluster](#module\_k3s\_cluster)
 
 Source: github.com/CBX0N/proxmox-create-k3s-cluster
 
-Version: v1.0.4
+Version: v1.0.5
 
 ## Resources
 
