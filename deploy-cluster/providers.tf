@@ -2,20 +2,16 @@ terraform {
   cloud {}
   required_providers {
     proxmox = {
-      source  = "Telmate/proxmox"
-      version = "3.0.1-rc4"
+      source = "Telmate/proxmox"
     }
     onepassword = {
-      source  = "1Password/onepassword"
-      version = "2.1.2"
+      source = "1Password/onepassword"
     }
     flux = {
-      source  = "fluxcd/flux"
-      version = "1.4.0"
+      source = "fluxcd/flux"
     }
     github = {
       source = "integrations/github"
-      version = "6.4.0"
     }
   }
 }

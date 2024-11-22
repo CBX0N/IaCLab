@@ -28,8 +28,8 @@ resource "onepassword_item" "kubeconfig" {
 }
 
 module "fluxcd_bootstrap" {
-  source = "github.com/CBX0N/bootstrap-fluxcd-github?ref=v1.0.0"
-  kubeconfig_content = module.k3s_cluster.kubeconfig
+  source                       = "github.com/CBX0N/bootstrap-fluxcd-github?ref=v1.0.0"
+  kubeconfig_content           = module.k3s_cluster.kubeconfig
   github_org                   = var.github_org
   github_repository            = var.github_repository
   github_repository_visibility = var.github_repository_visibility
