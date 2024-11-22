@@ -27,6 +27,11 @@ resource "onepassword_item" "kubeconfig" {
   note_value = module.k3s_cluster.kubeconfig
 }
 
+resource "local_file" "kubeconfig" {
+  content  = module.k3s_cluster.kubeconfig
+  filename = "${path.cwd}/k3s.yaml"
+}
+
 module "fluxcd_bootstrap" {
   depends_on                   = [onepassword_item.kubeconfig]
   source                       = "github.com/CBX0N/bootstrap-fluxcd-github?ref=v1.0.1"
