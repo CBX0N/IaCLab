@@ -32,13 +32,13 @@ resource "local_file" "kubeconfig" {
   filename = "${path.cwd}/k3s.yaml"
 }
 
-resource "time_sleep" "wait_30_seconds" {
+resource "time_sleep" "wait_5m" {
   depends_on = [onepassword_item.kubeconfig]
   create_duration = "300s"
 }
 
 module "fluxcd_bootstrap" {
-  depends_on                   = [local_file.kubeconfig]
+  depends_on                   = [time_sleep.wait_5m]
   source                       = "github.com/CBX0N/bootstrap-fluxcd-github?ref=v1.0.1"
   kubeconfig_content           = module.k3s_cluster.kubeconfig
   github_org                   = var.github_org
