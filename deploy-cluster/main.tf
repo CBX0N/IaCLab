@@ -30,7 +30,7 @@ resource "onepassword_item" "kubeconfig" {
 resource "local_file" "kubeconfig" {
   depends_on = [ module.k3s_cluster ]
   content  = module.k3s_cluster.kubeconfig
-  filename = "~/.kube/k3s.yaml"
+  filename = "~/.kube/${var.environment}.yaml"
 }
 
 resource "time_sleep" "wait_5m" {
