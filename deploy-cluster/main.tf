@@ -32,11 +32,11 @@ resource "local_file" "kubeconfig" {
   filename = "${path.cwd}/k3s.yaml"
 }
 
-# module "fluxcd_bootstrap" {
-#   depends_on                   = [local_file.kubeconfig]
-#   source                       = "github.com/CBX0N/bootstrap-fluxcd-github?ref=v1.0.1"
-#   kubeconfig_content           = module.k3s_cluster.kubeconfig
-#   github_org                   = var.github_org
-#   github_repository            = var.github_repository
-#   github_repository_visibility = var.github_repository_visibility
-# }
+module "fluxcd_bootstrap" {
+  depends_on                   = [local_file.kubeconfig]
+  source                       = "github.com/CBX0N/bootstrap-fluxcd-github?ref=v1.0.1"
+  kubeconfig_content           = module.k3s_cluster.kubeconfig
+  github_org                   = var.github_org
+  github_repository            = var.github_repository
+  github_repository_visibility = var.github_repository_visibility
+}
