@@ -32,6 +32,7 @@ jobs:
             TF_WORKSPACE: "cluster_deploy_dev"
             TF_CLOUD_ORGANIZATION: "cbxon"
             TF_VAR_environment: dev
+            TF_VAR_KUBE_CONFIG_PATH: "~/.kube/dev.yaml"
         steps:
             - uses: actions/checkout@v4
             - run: terraform init
