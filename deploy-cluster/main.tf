@@ -33,4 +33,5 @@ module "fluxcd_bootstrap" {
   github_org                   = var.github_org
   github_repository            = var.github_repository
   github_repository_visibility = var.github_repository_visibility
+  github_token                 = data.onepassword_item.github_token.password
 }
