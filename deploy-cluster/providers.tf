@@ -28,7 +28,7 @@ provider "proxmox" {
 
 provider "flux" {
   kubernetes = {
-    config_path = local_file.kubeconfig.filename
+    config_path = "~/.kube/dev.yaml"
   }
   git = {
     url = "https://github.com/${var.github_org}/${var.github_repository}.git"
