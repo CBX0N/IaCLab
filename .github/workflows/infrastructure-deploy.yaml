@@ -58,8 +58,6 @@ jobs:
             TF_CLOUD_ORGANIZATION: "cbxon"
             TF_VAR_environment: dev
             tfplan: ${{ needs.terraform-plan-proxmox.outputs.tfplan}}
-            TF_VAR_KUBE_CONFIG_PATH: "~/.kube/dev.yaml"
-
         steps:
             - if: env.tfplan == 2
               run: |
