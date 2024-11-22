@@ -49,11 +49,30 @@ variable "onepassword_vault" {
 
 variable "onepassword_secrets" {
   type = object({
-    proxmox_ssh = string
-    proxmox_api = string
+    proxmox_ssh  = string
+    proxmox_api  = string
+    github_token = string
   })
 }
 
 variable "environment" {
   type = string
+}
+
+variable "github_org" {
+  description = "GitHub organization"
+  type        = string
+  default     = ""
+}
+
+variable "github_repository" {
+  description = "GitHub repository"
+  type        = string
+  default     = ""
+}
+
+variable "github_repository_visibility" {
+  description = "GitHub repository visibility"
+  type        = string
+  default     = "private"
 }

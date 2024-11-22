@@ -33,6 +33,11 @@ cluster_config = {
 
 onepassword_vault = "uadqgdescn34aubde6zusrehui"
 onepassword_secrets = {
-  proxmox_api = "proxmox-api"
-  proxmox_ssh = "proxmox-ssh"
+  proxmox_api  = "proxmox-api"
+  proxmox_ssh  = "proxmox-ssh"
+  github_token = "github_fluxcd_token"
 }
+
+github_org                   = "cbx0n"
+github_repository            = "homelab-dev-fluxcd"
+github_repository_visibility = "public"

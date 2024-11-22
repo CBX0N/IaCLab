@@ -13,3 +13,8 @@ data "onepassword_item" "cluster_ssh_keys" {
   vault    = var.onepassword_vault
   title    = each.key
 }
+
+data "onepassword_item" "github_token" {
+  vault = var.onepassword_vault
+  title = var.onepassword_secrets.github_token
+}
