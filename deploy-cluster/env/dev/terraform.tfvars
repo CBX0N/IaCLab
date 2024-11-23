@@ -18,7 +18,7 @@ proxmox_vm_config = {
   ip_gateway    = "192.168.0.1"
   ip_prefix     = "192.168.0"
   disk_location = "datastore1"
-  
+
 }
 
 cluster_config = {
@@ -40,5 +40,5 @@ onepassword_secrets = {
 }
 
 github_org                   = "cbx0n"
-github_repository            = "homelab-dev-fluxcd"
+github_repository            = "homelab-fluxcd"
 github_repository_visibility = "public"
