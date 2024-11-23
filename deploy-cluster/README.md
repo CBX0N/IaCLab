@@ -5,17 +5,17 @@
 
 The following providers are used by this module:
 
+- <a name="provider_flux"></a> [flux](#provider\_flux)
+
+- <a name="provider_local"></a> [local](#provider\_local)
+
 - <a name="provider_onepassword"></a> [onepassword](#provider\_onepassword)
+
+- <a name="provider_time"></a> [time](#provider\_time)
 
 ## Modules
 
 The following Modules are called:
-
-### <a name="module_fluxcd_bootstrap"></a> [fluxcd\_bootstrap](#module\_fluxcd\_bootstrap)
-
-Source: github.com/CBX0N/bootstrap-fluxcd-github
-
-Version: v1.0.1
 
 ### <a name="module_k3s_cluster"></a> [k3s\_cluster](#module\_k3s\_cluster)
 
@@ -27,7 +27,10 @@ Version: v1.0.5
 
 The following resources are used by this module:
 
+- [flux_bootstrap_git.repository](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/resources/bootstrap_git) (resource)
+- [local_file.kubeconfig](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) (resource)
 - [onepassword_item.kubeconfig](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/resources/item) (resource)
+- [time_sleep.wait_5m](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) (resource)
 - [onepassword_item.cluster_ssh_keys](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/item) (data source)
 - [onepassword_item.github_token](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/item) (data source)
 - [onepassword_item.proxmox_api](https://registry.terraform.io/providers/1Password/onepassword/latest/docs/data-sources/item) (data source)

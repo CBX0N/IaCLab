@@ -18,6 +18,7 @@ proxmox_vm_config = {
   ip_gateway    = "192.168.0.1"
   ip_prefix     = "192.168.0"
   disk_location = "datastore1"
+  
 }
 
 cluster_config = {
