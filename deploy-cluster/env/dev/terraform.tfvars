@@ -41,4 +41,3 @@ onepassword_secrets = {
 
 github_org                   = "cbx0n"
 github_repository            = "homelab-fluxcd"
-github_repository_visibility = "public"

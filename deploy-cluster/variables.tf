@@ -70,9 +70,3 @@ variable "github_repository" {
   type        = string
   default     = ""
 }
-
-variable "github_repository_visibility" {
-  description = "GitHub repository visibility"
-  type        = string
-  default     = "private"
-}
