@@ -3,14 +3,14 @@ nodes = {
     type = "primary"
     vmid = 211
   }
-  "k3sdev02" = {
-    type = "secondary"
-    vmid = 212
-  }
-  "k3sdev03" = {
-    type = "secondary"
-    vmid = 213
-  }
+  # "k3sdev02" = {
+  #   type = "secondary"
+  #   vmid = 212
+  # }
+  # "k3sdev03" = {
+  #   type = "secondary"
+  #   vmid = 213
+  # }
 }
 
 proxmox_vm_config = {
@@ -23,8 +23,8 @@ proxmox_vm_config = {
 }
 
 cluster_config = {
-  primary_service_run_command     = "--cluster-init --write-kubeconfig-mode=0644"
-  secondaries_service_run_command = "--server https:\\/\\/192.168.0.211:6443"
+  primary_service_run_command     = "--cluster-init --write-kubeconfig-mode=0644 --disable=servicelb --disable=traefik"
+  secondaries_service_run_command = "--server https:\\/\\/192.168.0.211:6443 --disable=servicelb --disable=traefik"
   admin_user                      = "ansible"
   ssh_keys                        = ["lab", "gitlab", "homelab"]
   packages                        = ["qemu-guest-agent", "containerd", "unzip", "nfs-common"]
@@ -33,12 +33,12 @@ cluster_config = {
   k3s_service_url                 = "https://raw.githubusercontent.com/k3s-io/k3s/refs/heads/master/k3s.service"
 }
 
+github_org                   = "cbx0n"
+github_repository            = "homelab-fluxcd"
+
 onepassword_vault = "uadqgdescn34aubde6zusrehui"
 onepassword_secrets = {
   proxmox_api  = "proxmox-api"
   proxmox_ssh  = "proxmox-ssh"
   github_token = "github_fluxcd_token"
 }
-
-github_org                   = "cbx0n"
-github_repository            = "homelab-fluxcd"
