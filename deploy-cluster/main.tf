@@ -41,5 +41,5 @@ resource "time_sleep" "wait_5m" {
 resource "flux_bootstrap_git" "repository" {
   depends_on         = [time_sleep.wait_5m, local_file.kubeconfig]
   embedded_manifests = true
-  path               = "clusters/${environment}/"
+  path               = "clusters/${var.environment}/"
 }
