@@ -20,6 +20,7 @@ proxmox_vm_config = {
   disk_location = "datastore1"
   memory        = 8192
   balloon       = 1024
+  cores         = 2
 }
 
 cluster_config = {
