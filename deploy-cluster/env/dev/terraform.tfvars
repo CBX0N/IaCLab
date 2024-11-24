@@ -3,14 +3,14 @@ nodes = {
     type = "primary"
     vmid = 211
   }
-  # "k3sdev02" = {
-  #   type = "secondary"
-  #   vmid = 212
-  # }
-  # "k3sdev03" = {
-  #   type = "secondary"
-  #   vmid = 213
-  # }
+  "k3sdev02" = {
+    type = "secondary"
+    vmid = 212
+  }
+  "k3sdev03" = {
+    type = "secondary"
+    vmid = 213
+  }
 }
 
 proxmox_vm_config = {
