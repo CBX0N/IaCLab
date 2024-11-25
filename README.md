@@ -112,7 +112,3 @@
 
 ## License
 This repository is licensed under the MIT License.
-
-<!-- BEGIN_TF_DOCS -->
-
-<!-- END_TF_DOCS -->
