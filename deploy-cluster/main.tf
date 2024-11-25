@@ -1,6 +1,5 @@
 module "k3s_cluster" {
   source            = "github.com/CBX0N/proxmox-create-k3s-cluster?ref=add-agents"
-  proxmox_vm_config = var.proxmox_vm_config
   master_node_vm_config = var.master_node_vm_config
   agent_node_vm_config = var.agent_node_vm_config
   cluster_config = {
