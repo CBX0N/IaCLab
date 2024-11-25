@@ -20,8 +20,8 @@ agent_node_vm_config = {
 
 cluster_config = {
   primary_service_run_command     = "--cluster-init --write-kubeconfig-mode=0644 --disable=servicelb --disable=traefik"
-  secondaries_service_run_command = "--server https:\\/\\/192.168.0.211:6443 --disable=servicelb --disable=traefik"
-  agents_service_run_command      = "--server https:\\/\\/192.168.0.211:6443"
+  secondaries_service_run_command = "--server https:\\/\\/192.168.0.220:6443 --disable=servicelb --disable=traefik"
+  agents_service_run_command      = "--server https:\\/\\/192.168.0.220:6443"
   admin_user                      = "ansible"
   ssh_keys                        = ["lab", "gitlab", "homelab"]
   packages                        = ["qemu-guest-agent", "containerd", "unzip", "nfs-common"]
