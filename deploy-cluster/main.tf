@@ -1,5 +1,5 @@
 module "k3s_cluster" {
-  source            = "github.com/CBX0N/proxmox-create-k3s-cluster?ref=add-agents"
+  source            = "github.com/CBX0N/proxmox-create-k3s-cluster?ref=v1.0.6"
   master_node_vm_config = var.master_node_vm_config
   agent_node_vm_config = var.agent_node_vm_config
   cluster_config = {
@@ -46,4 +46,5 @@ resource "flux_bootstrap_git" "repository" {
   depends_on         = [time_sleep.wait_5m, local_file.kubeconfig]
   embedded_manifests = true
   path               = "clusters/${var.environment}/"
+  
 }

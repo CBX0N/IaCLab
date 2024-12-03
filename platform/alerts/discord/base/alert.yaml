@@ -1,0 +1,14 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: discord
+  namespace: flux-system
+spec:
+  summary: "Cluster addons impacted in Proxmox Hosted DEV Cluster"
+  providerRef:
+    name: discord-bot
+  eventSources:
+    - kind: GitRepository
+      name: '*'
+    - kind: Kustomization
+      name: '*'

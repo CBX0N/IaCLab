@@ -90,3 +90,9 @@ variable "github_repository" {
   type        = string
   default     = ""
 }
+
+variable "github_branch" {
+  description = "GitHub repository"
+  type        = string
+  default     = "master"
+}

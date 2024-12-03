@@ -32,6 +32,7 @@ provider "flux" {
   }
   git = {
     url = "https://github.com/${var.github_org}/${var.github_repository}.git"
+    branch = var.github_branch
     http = {
       username = "git"
       password = data.onepassword_item.github_token.password

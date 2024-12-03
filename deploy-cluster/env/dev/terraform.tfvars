@@ -37,7 +37,8 @@ cluster_config = {
 }
 
 github_org        = "cbx0n"
-github_repository = "homelab-fluxcd"
+github_repository = "homelab-iac"
+github_branch     = "master"
 
 onepassword_vault = "uadqgdescn34aubde6zusrehui"
 onepassword_secrets = {
