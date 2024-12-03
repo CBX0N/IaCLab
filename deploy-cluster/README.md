@@ -21,7 +21,7 @@ The following Modules are called:
 
 Source: github.com/CBX0N/proxmox-create-k3s-cluster
 
-Version: add-agents
+Version: v1.0.6
 
 ## Resources
 
@@ -154,6 +154,14 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
+
+### <a name="input_github_branch"></a> [github\_branch](#input\_github\_branch)
+
+Description: GitHub repository
+
+Type: `string`
+
+Default: `"master"`
 
 ### <a name="input_github_org"></a> [github\_org](#input\_github\_org)
 
