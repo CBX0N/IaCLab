@@ -3,7 +3,6 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: longhorn
-  namespace: flux-system
 spec:
   interval: 1m
   url: https://charts.longhorn.io
@@ -12,7 +11,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: longhorn
-  namespace: flux-system
 spec:
   targetNamespace: longhorn-system
   install:
@@ -25,5 +23,4 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: longhorn
-        namespace: flux-system
       interval: 10m
