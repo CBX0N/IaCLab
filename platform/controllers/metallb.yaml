@@ -22,5 +22,6 @@ spec:
       chart: metallb
       sourceRef:
         kind: HelmRepository
-        name: flux-system
+        name: metallb
+        namespace: flux-system
       interval: 10m
