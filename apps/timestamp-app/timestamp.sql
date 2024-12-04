@@ -1,0 +1,4 @@
+CREATE TABLE timestamps (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
