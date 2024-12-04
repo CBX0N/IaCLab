@@ -4,5 +4,3 @@ kind: Kustomization
 resources:
   - longhorn.yaml
   - metallb.yaml
-  - ingress-nginx.yaml
-
