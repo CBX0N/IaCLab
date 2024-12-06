@@ -7,7 +7,7 @@ metadata:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: crossplane-system
+  name: crossplane
   namespace: crossplane-system
 spec:
   interval: 1m
@@ -16,7 +16,7 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: crossplane-system
+  name: crossplane
   namespace: crossplane-system
 spec:
   interval: 10m
@@ -25,6 +25,6 @@ spec:
       chart: crossplane
       sourceRef:
         kind: HelmRepository
-        name: crossplane-system
+        name: crossplane
         namespace: crossplane-system
       interval: 10m
