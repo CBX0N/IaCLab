@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-podinfo
+  annotations:
+    cert-manager.io/issuer: "cert-cluster-issuer"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - podinfo.cbxon.co.uk
+    secretName: cert-podinfo
+  rules:
+  - host: podinfo.cbxon.co.uk
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service-podinfo
+            port:
+              number: 80
