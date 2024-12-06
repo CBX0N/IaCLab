@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webtest
+  name: webtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webtest
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: webtest
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
