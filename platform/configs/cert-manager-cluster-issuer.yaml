@@ -1,8 +1,7 @@
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
   name: cert-cluster-issuer
-  namespace: cert-manager
 spec:
   acme:
     email: charlie@cbxon.co.uk
