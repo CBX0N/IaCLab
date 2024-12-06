@@ -9,6 +9,7 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
           serviceName: service-webtest
           servicePort: 80
