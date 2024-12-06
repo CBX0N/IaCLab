@@ -3,6 +3,7 @@ kind: Certificate
 metadata:
   name: cert-podinfo
   namespace: podinfo
+spec:
   dnsNames:
   - podinfo.cbxon.co.uk
   issuerRef:

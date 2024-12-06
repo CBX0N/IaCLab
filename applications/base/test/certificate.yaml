@@ -3,8 +3,9 @@ kind: Certificate
 metadata:
   name: cert-webtest
   namespace: podinfo
+spec:
   dnsNames:
-  - webtest.cbxon.co.uk
+    - webtest.cbxon.co.uk
   issuerRef:
     kind: ClusterIssuer
     name: cert-cluster-issuer
