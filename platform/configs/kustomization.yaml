@@ -5,3 +5,4 @@ resources:
   - ipAddressPool.yaml
   - l2advertisement.yaml
   - discord-alerts.yaml
+  - cert-manager-cluster-issuer.yaml
