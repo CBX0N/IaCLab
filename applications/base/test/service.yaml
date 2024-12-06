@@ -3,15 +3,15 @@ kind: Service
 metadata:
   labels:
     app: webtest
-  name: webtest
+  name: service-webtest
 spec:
   ports:
   - name: http
-    port: 9113
+    port: 80
     protocol: TCP
     targetPort: http
   selector:
     app: webtest
-  type: LoadBalancer
+  type: ClusterIP
 status:
   loadBalancer: {}

@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-webtest
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: webtest.cbxon.co.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: service-webtest
+          servicePort: 80
