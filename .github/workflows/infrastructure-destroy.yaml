@@ -25,7 +25,7 @@ jobs:
         needs: [ configure-runner ]
         defaults:
             run:
-                working-directory: deploy-cluster
+                working-directory: platform/terraform/deploy-cluster
         env:
             TF_TOKEN_app_terraform_io: ${{ secrets.HCP_TOKEN }}
             TF_VAR_onepassword_service_account_token: ${{ secrets.ONEPASSWORD_TOKEN }}
