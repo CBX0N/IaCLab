@@ -29,3 +29,6 @@ spec:
         name: ingress-nginx
         namespace: ingress-nginx
       interval: 10m
+  values:
+    tcp:
+      - 8080: "unifi/service-unifi:8080"
