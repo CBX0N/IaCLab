@@ -12,6 +12,7 @@ spec:
   - port: 8080
     protocol: TCP
     targetPort: internal-comms
+    name: internal-comms
   selector:
     app: unifi
   sessionAffinity: None
