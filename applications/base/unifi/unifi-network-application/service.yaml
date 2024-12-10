@@ -8,13 +8,24 @@ spec:
   ports:
   - port: 8443
     protocol: TCP
-    targetPort: https
-    name: https
+    targetPort: webadmin
+    name: webadmin
   - port: 8080
-    nodeport: 30100
     protocol: TCP
-    targetPort: internal-comms
-    name: internal-comms
+    targetPort: device-comms
+    name: device-comms
+  - port: 1900
+    protocol: UDP
+    targetPort: controller-discovery
+    name: controller-discovery
+  - port: 10001
+    protocol: UDP
+    targetPort: ap-discovery
+    name: ap-discovery
+  - port: 3478
+    protocol: UDP
+    targetPort: controller-discovery
+    name: unifi-stun
   selector:
     app: unifi
   sessionAffinity: None
