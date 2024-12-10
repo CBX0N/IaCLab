@@ -6,4 +6,4 @@ namespace: unifi
 resources:
   - namespace.yaml
   - mongodb
-  - unifi-network-application
+  # - unifi-network-application
