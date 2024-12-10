@@ -1,8 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cert-podinfo
-  namespace: podinfo
+  name: cert-unifi
 spec:
   dnsNames:
   - unifi.cbxon.co.uk
