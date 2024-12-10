@@ -16,8 +16,8 @@ spec:
         app: unifi
     spec:
       containers:
-      - image: mongo:4.4
-        name: unifi-db
+      - image: lscr.io/linuxserver/unifi-network-application:latest
+        name: unifi
         ports:
           - containerPort: 8443
           - containerPort: 8080
