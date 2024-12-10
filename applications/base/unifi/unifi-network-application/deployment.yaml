@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app: unifi
+        app: unifi-network-application
     spec:
       containers:
       - image: lscr.io/linuxserver/unifi-network-application:latest
