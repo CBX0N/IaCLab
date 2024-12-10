@@ -9,6 +9,7 @@ spec:
   - port: 8443
     protocol: TCP
     targetPort: https
+    name: https
   - port: 8080
     protocol: TCP
     targetPort: internal-comms
