@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: unifi
+  name: unifi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unifi
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: unifi
+    spec:
+      containers:
+      - image: mongo:4.4
+        name: unifi-db
+        ports:
+          - containerPort: 8443
+          - containerPort: 8080
+          - containerPort: 8880
+          - containerPort: 6789
+          - containerPort: 3478
+            protocol: UDP
+          - containerPort: 10001
+            protocol: UDP
+          - containerPort: 1900
+            protocol: UDP
+          - containerPort: 5514
+            protocol: UDP
+        env:
+        - name: PUID
+          value: 1000
+        - name: PGID
+          value: 1000
+        - name: MONGO_USER
+          value: unifi
+        - name: MONGO_PASS
+          value: unifi
+        - name: MONGO_HOST
+          value: unifi-db
+        - name: MONGO_PORT
+          value: 27017
+        - name: MONGO_DBNAME
+          value: unifi
+        - name: MONGO_AUTHSOURCE
+          value: admin
+      #   volumeMounts:
+      #   - name: unifi-network-application
+      #     mountPath: "/config"
+      #     readOnly: false
+      # volumes: {}
+status: {}

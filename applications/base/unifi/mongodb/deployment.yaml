@@ -60,5 +60,4 @@ spec:
           items:
           - key: "init-mongodb"
             path: "init-mongodb.sh"
-        resources: {}
 status: {}
