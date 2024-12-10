@@ -16,15 +16,15 @@ spec:
     name: device-comms
   - port: 1900
     protocol: UDP
-    targetPort: controller-discovery
-    name: controller-discovery
+    targetPort: cont-discovery
+    name: cont-discovery
   - port: 10001
     protocol: UDP
     targetPort: ap-discovery
     name: ap-discovery
   - port: 3478
     protocol: UDP
-    targetPort: controller-discovery
+    targetPort: unifi-stun
     name: unifi-stun
   selector:
     app: unifi

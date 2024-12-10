@@ -25,7 +25,7 @@ spec:
             name: device-comms
           - containerPort: 1900
             protocol: UDP
-            name: controller-discovery
+            name: cont-discovery
           - containerPort: 10001
             protocol: UDP
             name: ap-discovery
