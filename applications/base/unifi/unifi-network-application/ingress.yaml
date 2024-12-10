@@ -24,11 +24,4 @@ spec:
             name: service-unifi
             port:
               number: 8443
-      - path: /inform
-        pathType: Prefix
-        backend:
-          service:
-            name: service-unifi
-            port:
-              number: 8080
 

@@ -11,6 +11,7 @@ spec:
     targetPort: https
     name: https
   - port: 8080
+    nodeport: 30100
     protocol: TCP
     targetPort: internal-comms
     name: internal-comms
