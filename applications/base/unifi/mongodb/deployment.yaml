@@ -51,7 +51,7 @@ spec:
                 key: MONGO_AUTHSOURCE
         volumeMounts:
         - name: init-mongodb
-          mountPath: "/docker-entrypoint-initdb.d/init-mongo.sh"
+          mountPath: "/docker-entrypoint-initdb.d"
           readOnly: true
       volumes:
       - name: init-mongodb
@@ -59,6 +59,6 @@ spec:
           name: unifi-mongodb
           items:
           - key: "init-mongodb"
-            path: "init-mongodb"
+            path: "init-mongodb.sh"
         resources: {}
 status: {}
