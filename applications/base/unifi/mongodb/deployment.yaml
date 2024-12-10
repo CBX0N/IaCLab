@@ -19,7 +19,8 @@ spec:
       - image: mongo:4.4
         name: unifi-db
         ports: 
-          - containerPort: 27017
+          - name: mongodb
+            containerPort: 27017
         env:
           - name: MONGODB_INITDB_ROOT_USERNAME
             valueFrom:
