@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-podinfo
+  namespace: podinfo
+spec:
+  dnsNames:
+  - unifi.cbxon.co.uk
+  issuerRef:
+    kind: ClusterIssuer
+    name: cert-cluster-issuer
+  secretName: unifi
