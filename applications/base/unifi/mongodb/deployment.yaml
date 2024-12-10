@@ -16,7 +16,7 @@ spec:
         app: unifi
     spec:
       containers:
-      - image: mongo
+      - image: mongo:4.4
         name: unifi-db
         env:
           - name: MONGODB_INITDB_ROOT_USERNAME
