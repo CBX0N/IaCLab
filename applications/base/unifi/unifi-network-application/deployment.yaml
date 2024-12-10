@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: unifi
-  name: unifi-db
+  name: unifi
 spec:
   replicas: 1
   selector:
