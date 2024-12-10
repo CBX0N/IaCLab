@@ -22,6 +22,7 @@ spec:
           - containerPort: 8443
             name: https
           - containerPort: 8080
+            name: internal-comms
           - containerPort: 8880
           - containerPort: 6789
           - containerPort: 3478

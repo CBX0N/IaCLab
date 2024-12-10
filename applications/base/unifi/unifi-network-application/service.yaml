@@ -9,6 +9,9 @@ spec:
   - port: 8443
     protocol: TCP
     targetPort: https
+  - port: 8080
+    protocol: TCP
+    targetPort: internal-comms
   selector:
     app: unifi
   sessionAffinity: None
