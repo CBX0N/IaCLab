@@ -5,7 +5,7 @@ metadata:
     app: unifi
   name: unifi
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: unifi
@@ -19,17 +19,46 @@ spec:
       - image: mongo
         name: unifi-db
         env:
-        - name: MONGODB_INITDB_ROOT_USERNAME
-          value: "root"
-        - name: MONGODB_INITDB_ROOT_PASSWORD
-          value: "root"
-        - name: MONGO_USER
-          value: "unifi"
-        - name: MONGO_PASS
-          value: "unifi"
-        - name: MONGO_DBNAME
-          value: "unifi"
-        - name: MONGO_AUTHSOURCE
-          value: "admin"  
+          - name: MONGODB_INITDB_ROOT_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: unifi-mongodb
+                key: MONGODB_INITDB_ROOT_USERNAME
+          - name: MONGODB_INITDB_ROOT_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: unifi-mongodb
+                key: MONGODB_INITDB_ROOT_PASSWORD
+          - name: MONGO_USER
+            valueFrom:
+              configMapKeyRef:
+                name: unifi-mongodb
+                key: MONGO_USER
+          - name: MONGO_PASS
+            valueFrom:
+              configMapKeyRef:
+                name: unifi-mongodb
+                key: MONGO_PASS
+          - name: MONGO_DBNAME
+            valueFrom:
+              configMapKeyRef:
+                name: unifi-mongodb
+                key: MONGO_DBNAME
+          - name: MONGO_AUTHSOURCE
+            valueFrom:
+              configMapKeyRef:
+                name: unifi-mongodb
+                key: MONGO_AUTHSOURCE
+        volumeMounts:
+        - name: init-mongodb
+          mountPath: "/docker-entrypoint-initdb.d/init-mongo.sh"
+          readOnly: true
+      volumes:
+      - name: init-mongodb
+        configMap:
+          name: unifi-mongodb
+          items:
+          - key: "init-mongodb"
+            path: "init-mongodb"
         resources: {}
 status: {}
