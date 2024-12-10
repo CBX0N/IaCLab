@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: unifi
+  name: unifi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: unifi
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: unifi
+    spec:
+      containers:
+      - image: docker.io/mongodb
+        name: unifi-db
+        env:
+        - name: MONGODB_INITDB_ROOT_USERNAME
+          value: "root"
+        - name: MONGODB_INITDB_ROOT_PASSWORD
+          value: "root"
+        - name: MONGO_USER
+          value: "unifi"
+        - name: MONGO_PASS
+          value: "unifi"
+        - name: MONGO_DBNAME
+          value: "unifi"
+        - name: MONGO_AUTHSOURCE
+          value: "admin"  
+        resources: {}
+status: {}
