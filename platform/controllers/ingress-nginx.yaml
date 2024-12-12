@@ -32,3 +32,7 @@ spec:
   values:
     tcp:
       "8080": "unifi/service-unifi:8080"
+    udp:
+      "1900": "unifi/service-unifi:1900"
+      "10001": "unifi/service-unifi:10001"
+      "3478": "unifi/service-unifi:3478"     
